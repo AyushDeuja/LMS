@@ -6,9 +6,10 @@ import { MembersModule } from './members/members.module';
 import { BooksModule } from './books/books.module';
 import { TransactionsModule } from './transactions/transactions.module';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
-  imports: [UsersModule, MembersModule, BooksModule, TransactionsModule, CloudinaryModule],
+  imports: [UsersModule, MembersModule, BooksModule, TransactionsModule, CloudinaryModule, AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })

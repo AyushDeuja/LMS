@@ -11,7 +11,7 @@ export class BooksService {
     private readonly cloudinary: CloudinaryService,
   ) {}
   async create(createBookDto: CreateBookDto) {
-    createBookDto.user_id = 1;
+    //cloudinary image logic here
     if (createBookDto.book_img) {
       createBookDto.book_img = await this.cloudinary.uploadFile(
         createBookDto.book_img,

@@ -63,7 +63,7 @@ export class UsersService {
       user = await this.prisma.user.findUnique({
         where: { email: updateUserDto.email },
       });
-      if (user && user.id != id) {
+      if (user && user.id !== id) {
         throw new BadRequestException('The email is already registered');
       }
     }
@@ -72,7 +72,7 @@ export class UsersService {
       user = await this.prisma.user.findUnique({
         where: { mobile: updateUserDto.mobile },
       });
-      if (user && user.id != id) {
+      if (user && user.id !== id) {
         throw new BadRequestException(
           'This mobile no. has already been registered',
         );
