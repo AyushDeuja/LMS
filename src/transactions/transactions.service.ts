@@ -88,7 +88,7 @@ export class TransactionsService {
   async remove(id: number, user_id: number) {
     await this.findOne(id, user_id);
     return this.prisma.transaction.delete({
-      where: { id },
+      where: { id, user_id },
     });
   }
 }
