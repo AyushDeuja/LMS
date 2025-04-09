@@ -9,7 +9,14 @@ import { CloudinaryModule } from './cloudinary/cloudinary.module';
 import { AuthModule } from './auth/auth.module';
 
 @Module({
-  imports: [UsersModule, MembersModule, BooksModule, TransactionsModule, CloudinaryModule, AuthModule],
+  imports: [
+    UsersModule,
+    MembersModule,
+    BooksModule,
+    TransactionsModule,
+    CloudinaryModule,
+    AuthModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
