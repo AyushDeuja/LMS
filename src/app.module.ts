@@ -7,6 +7,7 @@ import { BooksModule } from './books/books.module';
 import { TransactionsModule } from './transactions/transactions.module';
 import { CloudinaryModule } from './cloudinary/cloudinary.module';
 import { AuthModule } from './auth/auth.module';
+import { MailerModule } from '@nestjs-modules/mailer';
 
 @Module({
   imports: [
@@ -16,6 +17,16 @@ import { AuthModule } from './auth/auth.module';
     TransactionsModule,
     CloudinaryModule,
     AuthModule,
+    MailerModule.forRoot({
+      transport: {
+        host: process.env.SMTP_HOST,
+        port: process.env.SMTP_PORT,
+        auth: {
+          user: process.env.SMTP_USER,
+          pass: process.env.SMTP_PASSWORD,
+        },
+      },
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],
