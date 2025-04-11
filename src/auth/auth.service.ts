@@ -23,12 +23,14 @@ export class AuthService {
     @InjectQueue('auth') private readonly queue: Queue,
   ) {}
   async register(registerDto: RegisterDto) {
+    const user = await this.usersService.create(registerDto);
+
     await this.queue.add('verifyEmailAddress', {
-      from: 'test@example.com',
-      to: 'test@test.com',
+      from: 'info@LMS.com',
+      to: user.email,
       otp: 123456,
     });
-    const user = await this.usersService.create(registerDto);
+
     const token = await this.jwtService.signAsync(user);
     return { token };
   }
