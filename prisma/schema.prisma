@@ -1,4 +1,3 @@
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,71 +7,85 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum ReservationType {
+  borrow
+  return
+}
+
 model User {
-  id Int @id @default(autoincrement())
-  name String @db.VarChar(100)
-  email String @db.VarChar(100) @unique
-  mobile String @db.VarChar(15) @unique
-  password String @db.VarChar(100)
+  id         Int      @id @default(autoincrement())
+  name       String   @db.VarChar(100)
+  email      String   @unique @db.VarChar(100)
+  mobile     String   @unique @db.VarChar(15)
+  password   String   @db.VarChar(100)
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
-  members Member[]
-  books Book[]
-  transactions Transaction[]
+  members            Member[]
+  books              Book[]
+  transactions       Transaction[]
+  verification_codes VerificationCode[]
+
   @@map("users")
 }
 
-model Member{
-  id Int @id @default(autoincrement())
-  user_id Int
-  name String @db.VarChar(100)
-  address String @db.VarChar(100)
-  email String @db.VarChar(100) @unique
-  mobile String @db.VarChar(15) @unique
+model Member {
+  id         Int      @id @default(autoincrement())
+  user_id    Int
+  name       String   @db.VarChar(100)
+  address    String   @db.VarChar(100)
+  email      String   @unique @db.VarChar(100)
+  mobile     String   @unique @db.VarChar(15)
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
   user User @relation(references: [id], fields: [user_id])
 
   transactions Transaction[]
+
   @@map("members")
 }
 
-model Book{
-  id Int @id @default(autoincrement())
-  user_id Int
-  title String @db.VarChar(100)
-  author String @db.VarChar(100)
-  quantity Int?
-  book_img String?
-  availability Boolean @default(true)
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-  user User @relation(references: [id], fields: [user_id])
-
+model Book {
+  id           Int      @id @default(autoincrement())
+  user_id      Int
+  title        String   @db.VarChar(100)
+  author       String   @db.VarChar(100)
+  quantity     Int?
+  book_img     String?
+  availability Boolean  @default(true)
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+  user         User     @relation(references: [id], fields: [user_id])
 
   transactions Transaction[]
 
   @@map("books")
 }
 
-model Transaction{
-  id Int @id @default(autoincrement())
-  user_id Int
-  book_id Int
-  member_id Int
-  transaction_date DateTime @default(now())
-  type ReservationType @default(borrow)
+model Transaction {
+  id               Int             @id @default(autoincrement())
+  user_id          Int
+  book_id          Int
+  member_id        Int
+  transaction_date DateTime        @default(now())
+  type             ReservationType @default(borrow)
 
-  book Book @relation(references: [id], fields: [book_id])
+  book   Book   @relation(references: [id], fields: [book_id])
   member Member @relation(references: [id], fields: [member_id])
-  user User @relation(references: [id], fields: [user_id])
+  user   User   @relation(references: [id], fields: [user_id])
 
   @@map("transactions")
 }
 
-enum ReservationType {
-  borrow
-  return
+model VerificationCode {
+  id               Int      @id @default(autoincrement())
+  user_id          Int
+  verificationCode Int
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  user User @relation(fields: [user_id], references: [id])
+
+  @@map("verification_codes")
 }
