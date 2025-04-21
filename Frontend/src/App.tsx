@@ -1,9 +1,13 @@
+import { Route, Routes } from "react-router";
+import Register from "./pages/register";
+import Login from "./pages/login";
+
 function App() {
   return (
-    <>
-      <h1 className="text-4xl font-bold">LMS</h1>
-      <h2 className="text-3xl">COMING SOON</h2>
-    </>
+    <Routes>
+      <Route path="/register" element={<Register />} />
+      <Route path="/" element={<Login />} />
+    </Routes>
   );
 }
 
