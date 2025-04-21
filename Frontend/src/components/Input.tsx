@@ -1,3 +1,7 @@
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { MouseEvent, useState } from "react";
+
 interface InputProps {
   content: string;
   type: string;
@@ -6,18 +10,39 @@ interface InputProps {
 }
 
 const Input = ({ content, type, id, name }: InputProps) => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleShowPassword = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setShowPassword(!showPassword);
+  };
+
+  const isPassword = type === "password";
+  const inputType = isPassword && showPassword ? "text" : type;
+
   return (
     <div>
-      <label htmlFor={name} className=" text-sm font-medium text-gray-700">
+      <label htmlFor={name} className="block text-sm font-medium text-gray-700">
         {content}
       </label>
-      <input
-        type={type}
-        id={id}
-        name={name}
-        required
-        className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
+      <div className="relative">
+        <input
+          type={inputType}
+          id={id}
+          name={name}
+          required
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        {isPassword && (
+          <button
+            type="button"
+            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600"
+            onClick={handleShowPassword}
+          >
+            <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />
+          </button>
+        )}
+      </div>
     </div>
   );
 };
