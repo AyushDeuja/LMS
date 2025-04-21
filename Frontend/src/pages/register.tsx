@@ -1,3 +1,6 @@
+import Button from "../components/Button";
+import Input from "../components/Input";
+
 const Register = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -6,72 +9,16 @@ const Register = () => {
           Register
         </h1>
         <form className="space-y-4">
-          <div>
-            <label
-              htmlFor="name"
-              className=" text-sm font-medium text-gray-700"
-            >
-              Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              required
-              className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-          <div>
-            <label
-              htmlFor="email"
-              className=" text-sm font-medium text-gray-700"
-            >
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              required
-              className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-          <div>
-            <label
-              htmlFor="mobile"
-              className=" text-sm font-medium text-gray-700"
-            >
-              Mobile
-            </label>
-            <input
-              type="tel"
-              id="mobile"
-              name="mobile"
-              required
-              className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-          <div>
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              required
-              className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-          <button
-            type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
-          >
-            Register
-          </button>
+          <Input name="name" type="text" id="name" content="Name" />
+          <Input name="email" type="email" id="email" content="Email" />
+          <Input name="mobile" type="tel" id="mobile" content="Mobile" />
+          <Input
+            name="password"
+            type="password"
+            id="password"
+            content="Password"
+          />
+          <Button content="Register" type="submit" bgColor="bg-blue-600" />
         </form>
       </div>
     </div>
