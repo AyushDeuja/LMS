@@ -1,5 +1,4 @@
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Eye, EyeOff } from "lucide-react";
 import { MouseEvent, useState } from "react";
 
 interface InputProps {
@@ -25,21 +24,19 @@ const Input = ({ content, type, id, name }: InputProps) => {
       <label htmlFor={name} className="block text-sm font-medium text-gray-700">
         {content}
       </label>
-      <div className="relative">
+      <div className="flex items-center justify-between w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
         <input
           type={inputType}
           id={id}
           name={name}
           required
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className={`border-none outline-0 ${
+            isPassword ? "w-[90%]" : "w-full"
+          }`}
         />
         {isPassword && (
-          <button
-            type="button"
-            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600"
-            onClick={handleShowPassword}
-          >
-            <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />
+          <button type="button" className="" onClick={handleShowPassword}>
+            {showPassword ? <EyeOff /> : <Eye />}
           </button>
         )}
       </div>
