@@ -2,13 +2,29 @@ import { NavLink } from "react-router";
 import Button from "../components/Button";
 import Input from "../components/Input";
 import { FormEvent } from "react";
+import axios from "axios";
+import { BASE_URL } from "../utils/constants";
 
 const Register = () => {
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const formValues = Object.fromEntries(formData.entries());
     console.log("Form Values:", formValues);
+
+    //fetching api
+    try {
+      const response = await axios(`${BASE_URL}/auth/register`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+        data: formValues,
+      });
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -20,7 +36,7 @@ const Register = () => {
         <form className="space-y-4" onSubmit={handleSubmit}>
           <Input name="name" type="text" id="name" content="Name" />
           <Input name="email" type="email" id="email" content="Email" />
-          <Input name="mobile" type="tel" id="mobile" content="Mobile" />
+          <Input name="mobile" type="tel" id="mobile" content="mobile" />
           <Input
             name="password"
             type="password"
