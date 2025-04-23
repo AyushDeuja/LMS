@@ -1,10 +1,11 @@
 import { NavLink } from "react-router";
 import Button from "../components/Button";
 import Input from "../components/Input";
+import { FormEvent } from "react";
 
 const Register = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-indigo-700 to-purple-600">
       <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
         <h1 className="text-2xl font-bold text-center mb-6 text-gray-800">
           Register

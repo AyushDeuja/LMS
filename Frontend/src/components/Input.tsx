@@ -24,7 +24,7 @@ const Input = ({ content, type, id, name }: InputProps) => {
       <label htmlFor={name} className="block text-sm font-medium text-gray-700">
         {content}
       </label>
-      <div className="flex items-center justify-between w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+      <div className="flex items-center justify-between w-full px-2 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
         <input
           type={inputType}
           id={id}

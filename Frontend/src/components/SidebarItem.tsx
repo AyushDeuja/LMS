@@ -8,18 +8,18 @@ interface SidebarItemProps {
 const SidebarItem = ({ content, to }: SidebarItemProps) => {
   return (
     <>
-      <li>
+      <li className="w-full px-4">
         <NavLink
           to={to}
           className={({ isActive }) =>
-            `block px-4 py-2 rounded-full transition-all duration-200 ${
+            `w-full flex px-4 py-2 rounded-xl ${
               isActive
-                ? "bg-white/20 text-white font-semibold"
+                ? "bg-white/40 text-white font-semibold"
                 : "text-white/80 hover:bg-white/10 hover:text-white"
             }`
           }
         >
-          {content}
+          <p className="text-lg">{content}</p>
         </NavLink>
       </li>
     </>
