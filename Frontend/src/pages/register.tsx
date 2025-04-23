@@ -1,3 +1,4 @@
+import { NavLink } from "react-router";
 import Button from "../components/Button";
 import Input from "../components/Input";
 
@@ -20,6 +21,12 @@ const Register = () => {
           />
           <Button content="Register" type="submit" bgColor="bg-blue-600" />
         </form>
+        <p className="text-sm text-center text-gray-600 mt-6">
+          Already have an account?{" "}
+          <NavLink to="/login" className="text-blue-600 hover:underline">
+            Log in
+          </NavLink>
+        </p>
       </div>
     </div>
   );
