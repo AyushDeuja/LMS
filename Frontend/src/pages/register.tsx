@@ -1,11 +1,12 @@
 import { NavLink } from "react-router";
 import Button from "../components/Button";
 import Input from "../components/Input";
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "../utils/constants";
 
 const Register = () => {
+  const [errorMessage, setErrorMessage] = useState("");
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -21,9 +22,12 @@ const Register = () => {
         method: "POST",
         data: formValues,
       });
-      console.log(response);
-    } catch (err) {
-      console.log(err);
+      localStorage.setItem("token", response.data.token);
+      // console.log(response);
+    } catch (err: any) {
+      setErrorMessage(
+        err.response?.data?.message || "Registration failed, Please try again"
+      );
     }
   };
 
@@ -43,6 +47,9 @@ const Register = () => {
             id="password"
             content="Password"
           />
+          {errorMessage && (
+            <p className="text-red-500 text-sm text-center">{errorMessage}</p>
+          )}
           <Button content="Register" type="submit" bgColor="bg-blue-600" />
         </form>
         <p className="text-sm text-center text-gray-600 mt-6">
