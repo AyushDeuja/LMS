@@ -1,4 +1,4 @@
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import Button from "../components/Button";
 import Input from "../components/Input";
 import { FormEvent, useState } from "react";
@@ -6,6 +6,7 @@ import axios from "axios";
 import { BASE_URL } from "../utils/constants";
 
 const Register = () => {
+  const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -23,7 +24,7 @@ const Register = () => {
         data: formValues,
       });
       localStorage.setItem("token", response.data.token);
-      // console.log(response);
+      navigate("/");
     } catch (err: any) {
       setErrorMessage(
         err.response?.data?.message || "Registration failed, Please try again"

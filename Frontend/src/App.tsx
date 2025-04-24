@@ -13,6 +13,8 @@ const ProtectedRoutes = () => {
   } catch (error) {
     console.log(error);
   }
+  // Check if the token is valid and not expired
+  // if valid redirect to the app layout else redirect to login
   return decodedToken ? <AppLayout /> : <Navigate to="/login" />;
 };
 

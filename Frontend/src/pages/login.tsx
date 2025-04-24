@@ -26,7 +26,6 @@ const Login = () => {
       });
       localStorage.setItem("token", response.data.token);
       navigate("/");
-      console.log(response);
     } catch (errorMessage: any) {
       setErrorMessage(
         errorMessage.response?.data?.message || "Login failed, Please try again"
