@@ -17,7 +17,7 @@ const Register = () => {
     try {
       const response = await axios(`${BASE_URL}/auth/register`, {
         headers: {
-          "Content-Type": "application/json",
+          "label-Type": "application/json",
         },
         method: "POST",
         data: formValues,
@@ -38,19 +38,19 @@ const Register = () => {
           Register
         </h1>
         <form className="space-y-4" onSubmit={handleSubmit}>
-          <Input name="name" type="text" id="name" content="Name" />
-          <Input name="email" type="email" id="email" content="Email" />
-          <Input name="mobile" type="tel" id="mobile" content="mobile" />
+          <Input name="name" type="text" id="name" label="Name" />
+          <Input name="email" type="email" id="email" label="Email" />
+          <Input name="mobile" type="tel" id="mobile" label="mobile" />
           <Input
             name="password"
             type="password"
             id="password"
-            content="Password"
+            label="Password"
           />
           {errorMessage && (
             <p className="text-red-500 text-sm text-center">{errorMessage}</p>
           )}
-          <Button content="Register" type="submit" bgColor="bg-blue-600" />
+          <Button label="Register" type="submit" bgColor="bg-blue-600" />
         </form>
         <p className="text-sm text-center text-gray-600 mt-6">
           Already have an account?{" "}

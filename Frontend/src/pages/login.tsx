@@ -18,7 +18,7 @@ const Login = () => {
     try {
       const response = await axios(`${BASE_URL}/auth/login`, {
         headers: {
-          "Content-Type": "application/json",
+          "label-Type": "application/json",
         },
         method: "POST",
         data: formValues,
@@ -41,18 +41,18 @@ const Login = () => {
             name="username"
             type="text"
             id="username"
-            content="Email or Mobile"
+            label="Email or Mobile"
           />
           <Input
             name="password"
             type="password"
             id="password"
-            content="Password"
+            label="Password"
           />
           {errorMessage && (
             <p className="text-red-500 text-sm text-center">{errorMessage}</p>
           )}
-          <Button content="Login" type="submit" bgColor="bg-blue-600" />
+          <Button label="Login" type="submit" bgColor="bg-blue-600" />
         </form>
         <p className="text-sm text-center text-gray-600 mt-6">
           Don't have an account?{" "}
