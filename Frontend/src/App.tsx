@@ -2,11 +2,19 @@ import { Route, Routes } from "react-router";
 import Register from "./pages/register";
 import Login from "./pages/login";
 import AppLayout from "./layout/AppLayout";
+import { jwtDecode } from "jwt-decode";
+
+const ProtectedRoutes = () => {
+  const token = localStorage.getItem("token");
+  const decodedToken = token && jwtDecode(token);
+  console.log(decodedToken);
+  return decodedToken ? <AppLayout /> : <Login />;
+};
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<AppLayout />}>
+      <Route path="/" element={<ProtectedRoutes />}>
         <Route path="/books" element={<div>Book Page</div>} />
         <Route path="/members" element={<div>Member Page</div>} />
         <Route path="/transactions" element={<div>Transaction Page</div>} />
