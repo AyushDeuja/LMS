@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router";
+import { Navigate, Route, Routes } from "react-router";
 import Register from "./pages/register";
 import Login from "./pages/login";
 import AppLayout from "./layout/AppLayout";
@@ -6,9 +6,14 @@ import { jwtDecode } from "jwt-decode";
 
 const ProtectedRoutes = () => {
   const token = localStorage.getItem("token");
-  const decodedToken = token && jwtDecode(token);
-  console.log(decodedToken);
-  return decodedToken ? <AppLayout /> : <Login />;
+  let decodedToken = null;
+  try {
+    decodedToken = token && jwtDecode(token);
+    console.log(decodedToken);
+  } catch (error) {
+    console.log(error);
+  }
+  return decodedToken ? <AppLayout /> : <Navigate to="/login" />;
 };
 
 function App() {

@@ -1,4 +1,4 @@
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import Button from "../components/Button";
 import Input from "../components/Input";
 import { FormEvent, useState } from "react";
@@ -6,6 +6,7 @@ import axios from "axios";
 import { BASE_URL } from "../utils/constants";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -24,6 +25,7 @@ const Login = () => {
         data: formValues,
       });
       localStorage.setItem("token", response.data.token);
+      navigate("/");
       console.log(response);
     } catch (errorMessage: any) {
       setErrorMessage(
