@@ -1,6 +1,15 @@
+import { useNavigate } from "react-router";
+import Button from "./Button";
 import SidebarItem from "./SidebarItem";
+import { LogOut } from "lucide-react";
 
 const Sidebar = () => {
+  const navigate = useNavigate();
+  const handleLogOut = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
+
   return (
     <aside className="w-1/4 h-full bg-gradient-to-b from-indigo-700 to-purple-600 text-white shadow-2xl flex flex-col">
       {/* Title and Logo */}
@@ -16,6 +25,16 @@ const Sidebar = () => {
           <SidebarItem content="💳 Transactions" to="/transactions" />
         </ul>
       </nav>
+      <div>
+        <Button
+          className="bg-red-500 hover:bg-red-700"
+          type="button"
+          label="Log Out"
+          noRounded
+          onClick={handleLogOut}
+          buttonIcon={<LogOut />}
+        />
+      </div>
     </aside>
   );
 };

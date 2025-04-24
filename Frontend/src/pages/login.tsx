@@ -54,7 +54,7 @@ const Login = () => {
           {errorMessage && (
             <p className="text-red-500 text-sm text-center">{errorMessage}</p>
           )}
-          <Button label="Login" type="submit" bgColor="bg-blue-600" />
+          <Button label="Login" type="submit" className="bg-blue-600" />
         </form>
         <p className="text-sm text-center text-gray-600 mt-6">
           Don't have an account?{" "}
