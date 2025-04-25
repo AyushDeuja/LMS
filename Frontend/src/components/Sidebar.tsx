@@ -19,18 +19,7 @@ const Sidebar = () => {
 
   const handleLogOut = () => {
     localStorage.removeItem("token");
-    toast.success("Logged out successfully!", {
-      position: "top-right",
-      autoClose: 1000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-    setTimeout(() => {
-      navigate("/login");
-    }, 2000); // Navigate after the toast is displayed
+    navigate("/login");
   };
 
   return (
