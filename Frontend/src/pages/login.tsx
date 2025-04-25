@@ -4,6 +4,7 @@ import Input from "../components/Input";
 import { FormEvent, useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "../utils/constants";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const navigate = useNavigate();
