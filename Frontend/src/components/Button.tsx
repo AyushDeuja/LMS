@@ -1,5 +1,3 @@
-import { IconNode } from "lucide-react";
-
 interface ButtonProps {
   label: string;
   type: "button" | "submit" | "reset";

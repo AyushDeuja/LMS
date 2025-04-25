@@ -2,9 +2,8 @@ import { NavLink, useNavigate } from "react-router";
 import Button from "../components/Button";
 import Input from "../components/Input";
 import { FormEvent, useState } from "react";
-import axios from "axios";
-import { BASE_URL } from "../utils/constants";
 import { toast } from "react-toastify";
+import { axiosInstance } from "../utils/axiosInterceptor";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -18,10 +17,7 @@ const Login = () => {
 
     //fetching api
     try {
-      const response = await axios(`${BASE_URL}/auth/login`, {
-        headers: {
-          "label-Type": "application/json",
-        },
+      const response = await axiosInstance(`/auth/login`, {
         method: "POST",
         data: formValues,
       });
@@ -75,7 +71,7 @@ const Login = () => {
           )}
           <Button label="Login" type="submit" className="bg-blue-600" />
         </form>
-        <p className="text-sm text-center text-gray-600 mt-6">
+        <p className="text-md text-center text-gray-800 mt-6">
           Don't have an account?{" "}
           <NavLink to="/register" className="text-blue-600 hover:underline">
             Register here

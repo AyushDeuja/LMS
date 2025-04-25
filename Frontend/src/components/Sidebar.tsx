@@ -2,7 +2,6 @@ import { useNavigate } from "react-router";
 import Button from "./Button";
 import SidebarItem from "./SidebarItem";
 import { LogOut } from "lucide-react";
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 
@@ -51,9 +50,9 @@ const Sidebar = () => {
                 onClick={handleLogOut}
               />
               <Button
-                className="bg-gray-500 hover:bg-gray-700 p-2"
+                className="bg-gray-500 hover:bg-gray-700 p-6"
                 type="button"
-                label="Cancel"
+                label="No"
                 onClick={handlePopUptoCancel}
               />
             </div>
