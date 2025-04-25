@@ -4,6 +4,7 @@ import Input from "../components/Input";
 import { FormEvent, useState } from "react";
 import axios from "axios";
 import { BASE_URL } from "../utils/constants";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -12,7 +13,6 @@ const Register = () => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const formValues = Object.fromEntries(formData.entries());
-    console.log("Form Values:", formValues);
 
     //fetching api
     try {
@@ -25,6 +25,15 @@ const Register = () => {
       });
       localStorage.setItem("token", response.data.token);
       navigate("/");
+      toast.success("Welcome", {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     } catch (err: any) {
       setErrorMessage(
         err.response?.data?.message || "Registration failed, Please try again"
