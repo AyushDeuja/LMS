@@ -27,11 +27,11 @@ const Books = () => {
   }, []);
 
   return (
-    <div className="h-full w-full flex flex-col p-8 bg-gray-100">
+    <div className="h-full w-full flex flex-col">
       <h1 className="text-2xl font-bold text-center mb-6 text-gray-800">
         Books
       </h1>
-      <div className="overflow-x-auto">
+      <div className="">
         <table className="w-full border-collapse bg-white shadow-lg rounded-lg">
           <thead>
             <tr className="bg-indigo-600 text-white">
@@ -48,7 +48,7 @@ const Books = () => {
                 key={book.id}
                 className={`bg-white hover:bg-indigo-100 transition-colors`}
               >
-                <td className="py-3 px-6 border-b border-gray-200">
+                <td className="py-3 px-6 border-b border-gray-200 font-bold">
                   {book.title}
                 </td>
                 <td className="py-3 px-6 border-b border-gray-200">
