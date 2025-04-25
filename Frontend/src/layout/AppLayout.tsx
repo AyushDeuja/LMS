@@ -7,7 +7,7 @@ const AppLayout = () => {
       {/* Sidebar component */}
       <Sidebar />
       {/* Main Content */}
-      <main className="w-3/4 h-full flex justify-center items-center p-8 overflow-y-auto">
+      <main className="w-full h-full flex justify-center items-center p-8 overflow-y-auto">
         <div className="w-full h-full bg-white rounded-2xl shadow-lg p-8 overflow-hidden">
           <Outlet />
         </div>

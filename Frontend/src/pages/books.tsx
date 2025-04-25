@@ -5,7 +5,11 @@ interface Book {
   title: string;
   author: string;
   id: number;
+  quantity: number;
+  availability: boolean;
+  book_img: string;
 }
+
 const Books = () => {
   const [data, setData] = useState<Book[]>([]);
   const fetchBooks = async () => {
@@ -33,20 +37,35 @@ const Books = () => {
             <tr className="bg-indigo-600 text-white">
               <th className="py-3 px-6 text-left">Title</th>
               <th className="py-3 px-6 text-left">Author</th>
+              <th className="py-3 px-6 text-left">Quantity</th>
+              <th className="py-3 px-6 text-left">Book Image</th>
+              <th className="py-3 px-6 text-left">Availability</th>
             </tr>
           </thead>
           <tbody>
             {data.map((book) => (
               <tr
                 key={book.id}
-                className={`bg-white
-                } hover:bg-indigo-100 transition-colors`}
+                className={`bg-white hover:bg-indigo-100 transition-colors`}
               >
                 <td className="py-3 px-6 border-b border-gray-200">
                   {book.title}
                 </td>
                 <td className="py-3 px-6 border-b border-gray-200">
                   {book.author}
+                </td>
+                <td className="py-3 px-6 border-b border-gray-200">
+                  {book.quantity}
+                </td>
+                <td className="py-3 px-6 border-b border-gray-200">
+                  <img
+                    src={book.book_img}
+                    alt={book.title}
+                    className="w-16 h-16 object-cover rounded-md"
+                  />
+                </td>
+                <td className="py-3 px-6 border-b border-gray-200">
+                  {book.availability ? "Available" : "Not Available"}
                 </td>
               </tr>
             ))}
