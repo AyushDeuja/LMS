@@ -21,7 +21,7 @@ const Sidebar = () => {
     });
     setTimeout(() => {
       navigate("/login");
-    }, 1500); // Navigate after the toast is displayed
+    }, 2000); // Navigate after the toast is displayed
   };
 
   return (
