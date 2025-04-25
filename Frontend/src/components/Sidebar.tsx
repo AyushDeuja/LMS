@@ -2,12 +2,26 @@ import { useNavigate } from "react-router";
 import Button from "./Button";
 import SidebarItem from "./SidebarItem";
 import { LogOut } from "lucide-react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Sidebar = () => {
   const navigate = useNavigate();
+
   const handleLogOut = () => {
     localStorage.removeItem("token");
-    navigate("/login");
+    toast.success("Logged out successfully!", {
+      position: "bottom-right",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+    setTimeout(() => {
+      navigate("/login");
+    }, 1500); // Navigate after the toast is displayed
   };
 
   return (
@@ -34,6 +48,7 @@ const Sidebar = () => {
           onClick={handleLogOut}
           buttonIcon={<LogOut />}
         />
+        <ToastContainer />
       </div>
     </aside>
   );
