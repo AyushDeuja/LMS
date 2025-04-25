@@ -32,7 +32,7 @@ const Login = () => {
         autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
-        pauseOnHover: true,
+        pauseOnHover: false,
         draggable: true,
         progress: undefined,
       });
@@ -40,6 +40,15 @@ const Login = () => {
       setErrorMessage(
         errorMessage.response?.data?.message || "Login failed, Please try again"
       );
+      toast.error("Login failed, Please try again", {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
   return (

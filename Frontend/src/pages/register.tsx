@@ -30,7 +30,7 @@ const Register = () => {
         autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
-        pauseOnHover: true,
+        pauseOnHover: false,
         draggable: true,
         progress: undefined,
       });
@@ -38,6 +38,15 @@ const Register = () => {
       setErrorMessage(
         err.response?.data?.message || "Registration failed, Please try again"
       );
+      toast.error("Registration failed, Please try again", {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
 
