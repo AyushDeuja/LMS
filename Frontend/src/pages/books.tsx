@@ -48,21 +48,25 @@ const Books = () => {
                 key={book.id}
                 className={`bg-white hover:bg-indigo-100 transition-colors`}
               >
-                <td className="py-3 px-6 border-b border-gray-200 font-bold">
+                <td className="py-3 px-6 border-b border-gray-200 font-bold text-lg ">
                   {book.title}
                 </td>
-                <td className="py-3 px-6 border-b border-gray-200">
+                <td className="py-3 px-6 border-b border-gray-200 font-semibold ">
                   {book.author}
                 </td>
                 <td className="py-3 px-6 border-b border-gray-200">
                   {book.quantity}
                 </td>
                 <td className="py-3 px-6 border-b border-gray-200">
-                  <img
-                    src={book.book_img}
-                    alt={book.title}
-                    className="w-16 h-16 object-cover rounded-md"
-                  />
+                  {book.book_img ? (
+                    <img
+                      src={book.book_img}
+                      alt={book.title}
+                      className="w-16 h-16 object-cover rounded-md"
+                    />
+                  ) : (
+                    "No Image Available"
+                  )}
                 </td>
                 <td className="py-3 px-6 border-b border-gray-200">
                   {book.availability ? "Available" : "Not Available"}
