@@ -21,8 +21,27 @@ const AddBooks = () => {
         },
       });
       console.log(response.data);
+
+      toast.success("Book Added Successfully", {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
     } catch (err: any) {
       console.log(err);
+      toast.error("Failed, Please try again", {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
 
