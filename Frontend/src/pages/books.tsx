@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { axiosInstance } from "../utils/axiosInterceptor";
+import Button from "../components/Button";
 
 interface Book {
   title: string;
@@ -27,9 +28,15 @@ const Books = () => {
 
   return (
     <div className="h-full w-full flex flex-col">
-      <h1 className="text-2xl font-bold text-center mb-6 text-gray-800">
-        Books
-      </h1>
+      <div className="flex items-center justify-between p-4">
+        <h1 className="text-2xl font-bold text-center  ">Books</h1>
+        <Button
+          label="Add Books"
+          type="button"
+          className="bg-blue-600 p-4"
+          onClick={() => {}}
+        />
+      </div>
       <div className="">
         <table className="w-full border-collapse bg-white shadow-lg rounded-lg">
           <thead>

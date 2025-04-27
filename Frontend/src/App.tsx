@@ -24,6 +24,7 @@ function App() {
     <Routes>
       <Route path="/" element={<ProtectedRoutes />}>
         <Route path="/books" element={<Books />} />
+        <Route path="/add-book" element={<Books />} />
         <Route path="/members" element={<div>Member Page</div>} />
         <Route path="/transactions" element={<div>Transaction Page</div>} />
       </Route>
