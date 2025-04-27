@@ -3,8 +3,11 @@ import Button from "../components/Button";
 import Input from "../components/Input";
 import { axiosInstance } from "../utils/axiosInterceptor";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
 
 const AddBooks = () => {
+  const navigate = useNavigate();
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -47,7 +50,15 @@ const AddBooks = () => {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-center">Add Books</h1>
+      <div className="flex items-center justify-between p-4">
+        <h1 className="text-2xl font-bold text-center">Add Books</h1>
+        <Button
+          label="Back"
+          type="button"
+          className="bg-blue-600 p-4"
+          onClick={() => navigate("/books")}
+        />
+      </div>
       <form className="space-y-4" onSubmit={handleSubmit}>
         <Input
           name="title"
