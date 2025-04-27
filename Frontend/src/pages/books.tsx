@@ -11,12 +11,11 @@ interface Book {
 }
 
 const Books = () => {
-  const [data, setData] = useState<Book[]>([]);
+  const [bookData, setBookData] = useState<Book[]>([]);
   const fetchBooks = async () => {
     try {
       const response = await axiosInstance(`/books`);
-      console.log("Books:", response.data);
-      setData(response.data);
+      setBookData(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -43,7 +42,7 @@ const Books = () => {
             </tr>
           </thead>
           <tbody>
-            {data.map((book) => (
+            {bookData.map((book) => (
               <tr
                 key={book.id}
                 className={`bg-white hover:bg-indigo-100 transition-colors`}
