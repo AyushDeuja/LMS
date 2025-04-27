@@ -17,7 +17,7 @@ const AddBooks = () => {
         data: {
           ...parsedFormValues,
           quantity: parseInt(parsedFormValues?.quantity, 10),
-          availability: (parsedFormValues?.availability, false),
+          availability: parsedFormValues?.availability === "on",
         },
       });
       console.log(response.data);
@@ -72,7 +72,12 @@ const AddBooks = () => {
           >
             Availability:
           </label>
-          <input type="checkbox" className="mx-3 size-5" />
+          <input
+            type="checkbox"
+            id="availability"
+            name="availability"
+            className="mx-3 size-5"
+          />
         </div>
         <Button label="Add Book" type="submit" className="bg-blue-600" />
       </form>
