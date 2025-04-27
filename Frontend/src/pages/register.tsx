@@ -84,7 +84,7 @@ const Register = () => {
           {errorMessage && (
             <p className="text-red-500 text-sm text-center">{errorMessage}</p>
           )}
-          <Button label="Register" type="submit" className="bg-blue-600" />
+          <Button label="Register" type="submit" />
         </form>
         <p className="text-md text-center text-gray-800 mt-6">
           Already have an account?{" "}

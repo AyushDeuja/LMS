@@ -44,13 +44,13 @@ const Sidebar = () => {
             </p>
             <div className="flex justify-between mt-8">
               <Button
-                className="bg-green-500 hover:bg-green-700 p-5"
+                className="bg-green-500 hover:bg-green-700 p-5 bg-none"
                 type="button"
                 label="Yes"
                 onClick={handleLogOut}
               />
               <Button
-                className="bg-gray-500 hover:bg-gray-700 p-6"
+                className="bg-gray-500 hover:bg-gray-700 p-6 bg-none"
                 type="button"
                 label="No"
                 onClick={handlePopUptoCancel}
@@ -59,7 +59,7 @@ const Sidebar = () => {
           </div>
         )}
         <Button
-          className="bg-red-500 hover:bg-red-700"
+          className="bg-red-500 hover:bg-red-700 bg-none"
           type="button"
           label="Log Out"
           noRounded

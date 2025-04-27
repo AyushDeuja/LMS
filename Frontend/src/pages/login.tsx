@@ -70,7 +70,7 @@ const Login = () => {
           {errorMessage && (
             <p className="text-red-500 text-sm text-center">{errorMessage}</p>
           )}
-          <Button label="Login" type="submit" className="bg-blue-600" />
+          <Button label="Login" type="submit" />
         </form>
         <p className="text-md text-center text-gray-800 mt-6">
           Don't have an account?{" "}

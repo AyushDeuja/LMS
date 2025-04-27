@@ -79,7 +79,7 @@ const AddBooks = () => {
             className="mx-3 size-5"
           />
         </div>
-        <Button label="Add Book" type="submit" className="bg-blue-600" />
+        <Button label="Add Book" type="submit" />
       </form>
     </div>
   );
