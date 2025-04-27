@@ -4,13 +4,13 @@ import Login from "./pages/login";
 import AppLayout from "./layout/AppLayout";
 import { jwtDecode } from "jwt-decode";
 import Books from "./pages/books";
+import AddBooks from "./pages/addBooks";
 
 const ProtectedRoutes = () => {
   const token = localStorage.getItem("token");
   let decodedToken = null;
   try {
     decodedToken = token && jwtDecode(token);
-    console.log(decodedToken);
   } catch (error) {
     console.log(error);
   }
@@ -24,7 +24,7 @@ function App() {
     <Routes>
       <Route path="/" element={<ProtectedRoutes />}>
         <Route path="/books" element={<Books />} />
-        <Route path="/add-book" element={<Books />} />
+        <Route path="/add-books" element={<AddBooks />} />
         <Route path="/members" element={<div>Member Page</div>} />
         <Route path="/transactions" element={<div>Transaction Page</div>} />
       </Route>

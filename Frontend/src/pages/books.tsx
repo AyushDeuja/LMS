@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { axiosInstance } from "../utils/axiosInterceptor";
 import Button from "../components/Button";
+import { useNavigate } from "react-router";
 
 interface Book {
   title: string;
@@ -12,6 +13,7 @@ interface Book {
 }
 
 const Books = () => {
+  const navigate = useNavigate();
   const [bookData, setBookData] = useState<Book[]>([]);
   const fetchBooks = async () => {
     try {
@@ -34,7 +36,7 @@ const Books = () => {
           label="Add Books"
           type="button"
           className="bg-blue-600 p-4"
-          onClick={() => {}}
+          onClick={() => navigate("/add-books")}
         />
       </div>
       <div className="">

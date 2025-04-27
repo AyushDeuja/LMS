@@ -13,7 +13,6 @@ const Login = () => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const formValues = Object.fromEntries(formData.entries());
-    console.log("Form Values:", formValues);
 
     //fetching api
     try {
@@ -58,12 +57,14 @@ const Login = () => {
             name="username"
             type="text"
             id="username"
+            required={true}
             label="Email or Mobile"
           />
           <Input
             name="password"
             type="password"
             id="password"
+            required={true}
             label="Password"
           />
           {errorMessage && (
