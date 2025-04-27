@@ -35,14 +35,14 @@ const Books = () => {
         <Button
           label="Add Books"
           type="button"
-          className="bg-blue-600 p-4"
+          className="p-4"
           onClick={() => navigate("/add-books")}
         />
       </div>
       <div className="flex-1 overflow-x-auto overflow-y-auto">
         <table className="w-full border-collapse bg-white shadow-lg rounded-lg">
-          <thead>
-            <tr className="bg-indigo-600 text-white">
+          <thead className="sticky top-0 bg-indigo-600 text-white z-10">
+            <tr>
               <th className="py-3 px-6 text-left">Title</th>
               <th className="py-3 px-6 text-left">Author</th>
               <th className="py-3 px-6 text-left">Quantity</th>

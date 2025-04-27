@@ -1,4 +1,4 @@
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 import Button from "../components/Button";
 import Input from "../components/Input";
 import { axiosInstance } from "../utils/axiosInterceptor";
@@ -7,6 +7,7 @@ import { useNavigate } from "react-router";
 
 const AddBooks = () => {
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState("");
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -34,7 +35,9 @@ const AddBooks = () => {
       });
       navigate("/books");
     } catch (err: any) {
-      console.log(err);
+      setErrorMessage(
+        err.response?.data?.message || "Failed, Please try again"
+      );
       toast.error("Failed, Please try again", {
         position: "top-right",
         autoClose: 1000,
@@ -89,6 +92,9 @@ const AddBooks = () => {
             className="mx-3 size-5"
           />
         </div>
+        {errorMessage && (
+          <p className="text-red-500 text-lg text-center">{errorMessage}</p>
+        )}
         <Button label="Add Book" type="submit" />
       </form>
     </div>
