@@ -7,7 +7,6 @@ import { useNavigate } from "react-router";
 
 const AddBooks = () => {
   const navigate = useNavigate();
-
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -15,7 +14,7 @@ const AddBooks = () => {
     const parsedFormValues = JSON.parse(formValues);
 
     try {
-      const response = await axiosInstance(`/books`, {
+      await axiosInstance(`/books`, {
         method: "POST",
         data: {
           ...parsedFormValues,
@@ -23,7 +22,6 @@ const AddBooks = () => {
           availability: parsedFormValues?.availability === "on",
         },
       });
-      console.log(response.data);
 
       toast.success("Book Added Successfully", {
         position: "top-right",
@@ -34,6 +32,7 @@ const AddBooks = () => {
         draggable: true,
         progress: undefined,
       });
+      navigate("/books");
     } catch (err: any) {
       console.log(err);
       toast.error("Failed, Please try again", {

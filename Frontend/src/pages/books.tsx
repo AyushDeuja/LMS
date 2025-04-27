@@ -31,7 +31,7 @@ const Books = () => {
   return (
     <div className="h-full w-full flex flex-col">
       <div className="flex items-center justify-between p-4">
-        <h1 className="text-2xl font-bold text-center  ">Books</h1>
+        <h1 className="text-2xl font-bold text-center">Books</h1>
         <Button
           label="Add Books"
           type="button"
@@ -39,7 +39,7 @@ const Books = () => {
           onClick={() => navigate("/add-books")}
         />
       </div>
-      <div className="">
+      <div className="flex-1 overflow-x-auto overflow-y-auto">
         <table className="w-full border-collapse bg-white shadow-lg rounded-lg">
           <thead>
             <tr className="bg-indigo-600 text-white">
@@ -56,10 +56,10 @@ const Books = () => {
                 key={book.id}
                 className={`bg-white hover:bg-indigo-100 transition-colors`}
               >
-                <td className="py-3 px-6 border-b border-gray-200 font-bold text-lg ">
+                <td className="py-3 px-6 border-b border-gray-200 font-bold text-lg">
                   {book.title}
                 </td>
-                <td className="py-3 px-6 border-b border-gray-200 font-semibold ">
+                <td className="py-3 px-6 border-b border-gray-200 font-semibold">
                   {book.author}
                 </td>
                 <td className="py-3 px-6 border-b border-gray-200">
