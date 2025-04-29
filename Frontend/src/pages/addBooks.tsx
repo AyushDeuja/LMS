@@ -1,13 +1,18 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import Button from "../components/Button";
 import Input from "../components/Input";
 import { axiosInstance } from "../utils/axiosInterceptor";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
+import { Book } from "./books";
 
 const AddBooks = () => {
   const navigate = useNavigate();
+  const [bookData, setBookData] = useState<Book>();
   const [errorMessage, setErrorMessage] = useState("");
+
+  const { id } = useParams();
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -49,6 +54,19 @@ const AddBooks = () => {
       });
     }
   };
+
+  const fetchBookFromId = async () => {
+    try {
+      const response = await axiosInstance(`/books/${id}`);
+      setBookData(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    fetchBookFromId();
+  }, [id]);
 
   return (
     <div>

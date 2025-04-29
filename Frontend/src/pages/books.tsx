@@ -4,7 +4,7 @@ import Button from "../components/Button";
 import { useNavigate } from "react-router";
 import { PencilIcon, Trash2Icon } from "lucide-react";
 
-interface Book {
+export interface Book {
   title: string;
   author: string;
   id: number;
