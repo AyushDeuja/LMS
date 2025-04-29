@@ -12,7 +12,7 @@ const AppLayout = () => {
           <Outlet />
         </div>
         {/* Footer */}
-        <footer className="w-full py-4 text-center bg-gradient-to-r from-purple-700 to-blue-700 shadow-lg">
+        <footer className="w-full py-3 text-center bg-gradient-to-r from-purple-700 to-blue-700 shadow-lg">
           <p className="text-sm text-white">
             © 2025 Library Management System. All rights reserved.
           </p>

@@ -59,7 +59,7 @@ const Sidebar = () => {
           </div>
         )}
         <Button
-          className="bg-red-500 hover:bg-red-700 bg-none"
+          className="bg-red-500 hover:bg-red-700 bg-none py-2.5"
           type="button"
           label="Log Out"
           noRounded
