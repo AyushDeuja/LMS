@@ -31,6 +31,14 @@ function App() {
         <Route path="/members" element={<div>Member Page</div>} />
         <Route path="/transactions" element={<div>Transaction Page</div>} />
       </Route>
+      <Route
+        path="*"
+        element={
+          <p className="text-red-600 font-bold text-3xl flex items-center justify-center h-screen">
+            ERROR 404: PAGE NOT FOUND
+          </p>
+        }
+      />
     </Routes>
   );
 }
