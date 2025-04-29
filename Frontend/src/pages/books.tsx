@@ -34,10 +34,10 @@ const Books = () => {
       <div className="flex items-center justify-between p-4">
         <h1 className="text-2xl font-bold text-center">Books</h1>
         <Button
-          label="Add Books"
+          label="Add Book"
           type="button"
           className="p-4"
-          onClick={() => navigate("/add-books")}
+          onClick={() => navigate("/add-book")}
         />
       </div>
       <div className="flex-1 overflow-x-auto overflow-y-auto">
@@ -89,7 +89,7 @@ const Books = () => {
                   <div className="flex items-center justify-center gap-4">
                     <PencilIcon
                       className="text-blue-400 cursor-pointer"
-                      onClick={() => navigate}
+                      onClick={() => navigate(`/edit-book/${book.id}`)}
                     />
                     <Trash2Icon className="text-red-400 cursor-pointer" />
                   </div>

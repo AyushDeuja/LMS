@@ -27,7 +27,9 @@ function App() {
       <Route path="/" element={<ProtectedRoutes />}>
         <Route path="/" element={<Navigate to="/books" />} />
         <Route path="/books" element={<Books />} />
-        <Route path="/add-books" element={<AddBooks />} />
+        <Route path="/add-book" element={<AddBooks />} />
+        <Route path="/edit-book/:id" element={<AddBooks />} />
+        <Route path="/delete-book/:id" element={<AddBooks />} />
         <Route path="/members" element={<div>Member Page</div>} />
         <Route path="/transactions" element={<div>Transaction Page</div>} />
       </Route>
