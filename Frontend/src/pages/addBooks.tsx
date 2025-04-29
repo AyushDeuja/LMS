@@ -18,10 +18,11 @@ const AddBooks = () => {
     const formData = new FormData(e.currentTarget);
     const formValues = JSON.stringify(Object.fromEntries(formData.entries()));
     const parsedFormValues = JSON.parse(formValues);
+    const url = id ? `/books/${id}` : "/books";
 
     try {
-      await axiosInstance(`/books`, {
-        method: "POST",
+      await axiosInstance(url, {
+        method: id ? "PATCH" : "POST",
         data: {
           ...parsedFormValues,
           quantity: parseInt(parsedFormValues?.quantity, 10),
@@ -29,7 +30,7 @@ const AddBooks = () => {
         },
       });
 
-      toast.success("Book Added Successfully", {
+      toast.success(`Book ${id ? "Updated" : "Added"} Successfully`, {
         position: "top-right",
         autoClose: 1000,
         hideProgressBar: false,
@@ -68,10 +69,21 @@ const AddBooks = () => {
     fetchBookFromId();
   }, [id]);
 
+  const handleBookChange = (e: any) => {
+    const { name, value, checked } = e.target;
+    setBookData((prevData) => ({
+      ...prevData,
+      [name]: name === "availability" ? checked : value,
+    }));
+    console.log(bookData);
+  };
+
   return (
     <div>
       <div className="flex items-center justify-between p-4">
-        <h1 className="text-2xl font-bold text-center">Add Books</h1>
+        <h1 className="text-2xl font-bold text-center">
+          {id ? "Edit Book" : "Add New Book"}
+        </h1>
         <Button
           label="Back"
           type="button"
@@ -80,10 +92,38 @@ const AddBooks = () => {
         />
       </div>
       <form className="space-y-4" onSubmit={handleSubmit}>
-        <Input name="title" type="text" id="title" label="Title" />
-        <Input name="author" type="text" id="author" label="Author" />
-        <Input name="quantity" type="number" id="quantity" label="Quantity" />
-        <Input name="book_img" type="text" id="book_img" label="Book Image" />
+        <Input
+          name="title"
+          type="text"
+          id="title"
+          label="Title"
+          value={bookData?.title}
+          onChange={handleBookChange}
+        />
+        <Input
+          name="author"
+          type="text"
+          id="author"
+          label="Author"
+          value={bookData?.author}
+          onChange={handleBookChange}
+        />
+        <Input
+          name="quantity"
+          type="number"
+          id="quantity"
+          label="Quantity"
+          value={bookData?.quantity}
+          onChange={handleBookChange}
+        />
+        <Input
+          name="book_img"
+          type="text"
+          id="book_img"
+          label="Book Image"
+          value={bookData?.book_img}
+          onChange={handleBookChange}
+        />
         <div className="flex items-center ">
           <label
             htmlFor="availability"
@@ -96,12 +136,14 @@ const AddBooks = () => {
             id="availability"
             name="availability"
             className="mx-3 size-5"
+            checked={bookData?.availability}
+            onChange={handleBookChange}
           />
         </div>
         {errorMessage && (
           <p className="text-red-500 text-lg text-center">{errorMessage}</p>
         )}
-        <Button label="Add Book" type="submit" />
+        <Button label={id ? "Update Book" : "Add Book"} type="submit" />
       </form>
     </div>
   );

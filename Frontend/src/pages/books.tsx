@@ -5,12 +5,12 @@ import { useNavigate } from "react-router";
 import { PencilIcon, Trash2Icon } from "lucide-react";
 
 export interface Book {
-  title: string;
-  author: string;
-  id: number;
-  quantity: number;
-  availability: boolean;
-  book_img: string;
+  title?: string;
+  author?: string;
+  id?: number;
+  quantity?: number;
+  availability?: boolean;
+  book_img?: string;
 }
 
 const Books = () => {
