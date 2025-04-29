@@ -2,7 +2,7 @@ import { useNavigate } from "react-router";
 import Button from "./Button";
 import SidebarItem from "./SidebarItem";
 import { LogOut } from "lucide-react";
-import "react-toastify/dist/ReactToastify.css";
+// import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 
 const Sidebar = () => {
@@ -22,7 +22,7 @@ const Sidebar = () => {
   };
 
   return (
-    <aside className="w-1/4 h-full bg-gradient-to-b from-indigo-700 to-purple-600 text-white shadow-3xl flex flex-col">
+    <aside className="w-1/4 h-full bg-gradient-to-b from-indigo-700 to-purple-600 text-white shadow-2xl flex flex-col">
       {/* Title and Logo */}
       <div className="p-6 border-b border-white/20">
         <h1 className="text-3xl font-extrabold tracking-wide">📘 LMS APP</h1>
