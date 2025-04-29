@@ -53,31 +53,12 @@ const Register = () => {
           Register
         </h1>
         <form className="space-y-4" onSubmit={handleSubmit}>
-          <Input
-            name="name"
-            type="text"
-            id="name"
-            label="Name"
-            required={true}
-          />
-          <Input
-            name="email"
-            type="email"
-            id="email"
-            label="Email"
-            required={true}
-          />
-          <Input
-            name="mobile"
-            type="tel"
-            id="mobile"
-            label="mobile"
-            required={true}
-          />
+          <Input name="name" type="text" id="name" label="Name" />
+          <Input name="email" type="email" id="email" label="Email" />
+          <Input name="mobile" type="tel" id="mobile" label="mobile" />
           <Input
             name="password"
             type="password"
-            required={true}
             id="password"
             label="Password"
           />

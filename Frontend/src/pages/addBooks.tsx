@@ -80,20 +80,8 @@ const AddBooks = () => {
         />
       </div>
       <form className="space-y-4" onSubmit={handleSubmit}>
-        <Input
-          name="title"
-          type="text"
-          id="title"
-          label="Title"
-          required={true}
-        />
-        <Input
-          name="author"
-          type="text"
-          id="author"
-          label="Author"
-          required={true}
-        />
+        <Input name="title" type="text" id="title" label="Title" />
+        <Input name="author" type="text" id="author" label="Author" />
         <Input name="quantity" type="number" id="quantity" label="Quantity" />
         <Input name="book_img" type="text" id="book_img" label="Book Image" />
         <div className="flex items-center ">

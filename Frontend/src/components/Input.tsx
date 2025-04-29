@@ -1,15 +1,22 @@
 import { Eye, EyeOff } from "lucide-react";
-import { MouseEvent, useState } from "react";
+import { InputHTMLAttributes, MouseEvent, useState } from "react";
 
-interface InputProps {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
   type: string;
   id: string;
   name: string;
-  required?: boolean | false;
+  required?: boolean;
 }
 
-const Input = ({ label, type, id, name, required }: InputProps) => {
+const Input = ({
+  label,
+  type,
+  id,
+  name,
+  required = true,
+  ...rest
+}: InputProps) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowPassword = (e: MouseEvent<HTMLButtonElement>) => {
@@ -34,6 +41,7 @@ const Input = ({ label, type, id, name, required }: InputProps) => {
           className={`border-none outline-0 ${
             isPassword ? "w-[90%]" : "w-full"
           }`}
+          {...rest}
         />
         {isPassword && (
           <button type="button" className="" onClick={handleShowPassword}>
