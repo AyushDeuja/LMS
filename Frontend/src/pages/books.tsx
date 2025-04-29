@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { axiosInstance } from "../utils/axiosInterceptor";
 import Button from "../components/Button";
 import { useNavigate } from "react-router";
+import { PencilIcon, Trash2Icon } from "lucide-react";
 
 interface Book {
   title: string;
@@ -48,6 +49,7 @@ const Books = () => {
               <th className="py-3 px-6 text-left">Quantity</th>
               <th className="py-3 px-6 text-left">Book Image</th>
               <th className="py-3 px-6 text-left">Availability</th>
+              <th className="py-3 px-6 text-left">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -82,6 +84,15 @@ const Books = () => {
                   ) : (
                     <p className="text-red-600">Not Available</p>
                   )}
+                </td>
+                <td>
+                  <div className="flex items-center justify-center gap-4">
+                    <PencilIcon
+                      className="text-blue-400 cursor-pointer"
+                      onClick={() => navigate}
+                    />
+                    <Trash2Icon className="text-red-400 cursor-pointer" />
+                  </div>
                 </td>
               </tr>
             ))}
