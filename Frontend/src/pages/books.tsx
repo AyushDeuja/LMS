@@ -3,6 +3,7 @@ import { axiosInstance } from "../utils/axiosInterceptor";
 import Button from "../components/Button";
 import { useNavigate } from "react-router";
 import { PencilIcon, Trash2Icon } from "lucide-react";
+import Modal from "../components/Modal";
 
 export interface Book {
   title?: string;
@@ -16,6 +17,9 @@ export interface Book {
 const Books = () => {
   const navigate = useNavigate();
   const [bookData, setBookData] = useState<Book[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedBookId, setSelectedBookId] = useState<number | null>(null);
+
   const fetchBooks = async () => {
     try {
       const response = await axiosInstance(`/books`);
@@ -29,16 +33,29 @@ const Books = () => {
     fetchBooks();
   }, []);
 
-  //delete logic here
-  const handleDelete = async (id: number) => {
+  const handleDelete = async () => {
+    if (selectedBookId === null) return;
     try {
-      await axiosInstance.delete(`/books/${id}`, {
+      await axiosInstance.delete(`/books/${selectedBookId}`, {
         method: "DELETE",
       });
-      setBookData((prevBooks) => prevBooks.filter((book) => book.id !== id));
+      setBookData((prevBooks) =>
+        prevBooks.filter((book) => book.id !== selectedBookId)
+      );
+      setIsModalOpen(false);
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const openModal = (id: number) => {
+    setSelectedBookId(id);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedBookId(null);
   };
 
   return (
@@ -105,7 +122,7 @@ const Books = () => {
                     />
                     <Trash2Icon
                       className="text-red-400 cursor-pointer"
-                      onClick={() => handleDelete(book.id as number)}
+                      onClick={() => openModal(book.id as number)}
                     />
                   </div>
                 </td>
@@ -114,6 +131,11 @@ const Books = () => {
           </tbody>
         </table>
       </div>
+      <Modal
+        isModalOpen={isModalOpen}
+        onClose={closeModal}
+        onConfirm={handleDelete}
+      />
     </div>
   );
 };
