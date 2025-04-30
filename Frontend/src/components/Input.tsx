@@ -15,7 +15,7 @@ const Input = ({
   id,
   name,
   required = true,
-  value = "",
+
   ...rest
 }: InputProps) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -39,7 +39,6 @@ const Input = ({
           id={id}
           name={name}
           required={required}
-          value={value}
           className={`border-none outline-0 ${
             isPassword ? "w-[90%]" : "w-full"
           }`}

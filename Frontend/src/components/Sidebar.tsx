@@ -2,23 +2,24 @@ import { useNavigate } from "react-router";
 import Button from "./Button";
 import SidebarItem from "./SidebarItem";
 import { LogOut } from "lucide-react";
-// import "react-toastify/dist/ReactToastify.css";
+import Modal from "./Modal";
 import { useState } from "react";
 
 const Sidebar = () => {
   const navigate = useNavigate();
   const [showConfirmation, setShowConfirmation] = useState(false);
 
-  const handlePopUptoConfirm = () => {
-    setShowConfirmation(true);
-  };
-  const handlePopUptoCancel = () => {
-    setShowConfirmation(false);
-  };
-
   const handleLogOut = () => {
     localStorage.removeItem("token");
     navigate("/login");
+  };
+
+  const openConfirmationModal = () => {
+    setShowConfirmation(true);
+  };
+
+  const closeConfirmationModal = () => {
+    setShowConfirmation(false);
   };
 
   return (
@@ -36,37 +37,25 @@ const Sidebar = () => {
           <SidebarItem content="💳 Transactions" to="/transactions" />
         </ul>
       </nav>
+
+      {/* Logout Button */}
       <div>
-        {showConfirmation && (
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-4 bg-white text-black shadow-lg rounded-lg font-bold">
-            <p className="mb-4 text-center text-xl">
-              Are you sure you want to log out?
-            </p>
-            <div className="flex justify-between mt-8">
-              <Button
-                className="bg-green-500 hover:bg-green-700 p-5 bg-none"
-                type="button"
-                label="Yes"
-                onClick={handleLogOut}
-              />
-              <Button
-                className="bg-gray-500 hover:bg-gray-700 p-6 bg-none"
-                type="button"
-                label="No"
-                onClick={handlePopUptoCancel}
-              />
-            </div>
-          </div>
-        )}
         <Button
           className="bg-red-500 hover:bg-red-700 bg-none py-2.5"
           type="button"
           label="Log Out"
           noRounded
-          onClick={handlePopUptoConfirm}
+          onClick={openConfirmationModal}
           buttonIcon={<LogOut />}
         />
       </div>
+
+      {/* Confirmation Modal */}
+      <Modal
+        isModalOpen={showConfirmation}
+        onClose={closeConfirmationModal}
+        onConfirm={handleLogOut}
+      />
     </aside>
   );
 };

@@ -72,6 +72,7 @@ const AddBooks = () => {
   };
 
   const fetchBookFromId = async () => {
+    if (!id) return; // Only fetch if an ID is present
     try {
       const response = await axiosInstance(`/books/${id}`);
       setBookData(response.data);
@@ -117,7 +118,7 @@ const AddBooks = () => {
           type="text"
           id="title"
           label="Title"
-          value={bookData?.title}
+          value={bookData?.title || ""}
           onChange={handleBookChange}
         />
         <Input
@@ -125,7 +126,7 @@ const AddBooks = () => {
           type="text"
           id="author"
           label="Author"
-          value={bookData?.author}
+          value={bookData?.author || ""}
           onChange={handleBookChange}
         />
         <Input
@@ -133,7 +134,7 @@ const AddBooks = () => {
           type="number"
           id="quantity"
           label="Quantity"
-          value={bookData?.quantity}
+          value={bookData?.quantity || ""}
           onChange={handleBookChange}
         />
         <div>
