@@ -154,6 +154,9 @@ const Books = () => {
         isModalOpen={isModalOpen}
         onClose={closeModal}
         onConfirm={handleDelete}
+        content="Are you sure you want to delete this book? This action cannot be
+        undone."
+        title="Delete"
       />
     </div>
   );

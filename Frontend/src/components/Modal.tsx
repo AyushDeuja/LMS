@@ -4,9 +4,17 @@ interface ModalProps {
   isModalOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
+  content: string;
+  title: string;
 }
 
-export default function Modal({ isModalOpen, onClose, onConfirm }: ModalProps) {
+export default function Modal({
+  isModalOpen,
+  onClose,
+  onConfirm,
+  content,
+  title,
+}: ModalProps) {
   return (
     <div
       className={`w-screen h-screen bg-[#00000079] flex justify-center items-center absolute inset-0 ${
@@ -15,12 +23,9 @@ export default function Modal({ isModalOpen, onClose, onConfirm }: ModalProps) {
     >
       <div className="w-[600px] h-[200px] bg-white rounded p-4 flex flex-col justify-between">
         <div className="text w-full">
-          <div className="flex flex-col gap-4">
-            <h1 className="text-lg font-bold">Delete Book</h1>
-            <p>
-              Are you sure you want to delete this book? This action cannot be
-              undone.
-            </p>
+          <div className="flex flex-col gap-4 text-black">
+            <h1 className="text-lg font-bold">{title}</h1>
+            <p>{content}</p>
           </div>
         </div>
         <div className="button w-full flex justify-end items-center gap-4">
