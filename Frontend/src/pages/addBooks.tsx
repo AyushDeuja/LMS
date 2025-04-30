@@ -20,7 +20,7 @@ const AddBooks = () => {
     reader.readAsDataURL(selectedFile);
 
     reader.onload = () => {
-      console.log("called: ", reader);
+      console.log(reader.result);
       setBase64IMG(reader.result);
     };
   };
@@ -76,7 +76,6 @@ const AddBooks = () => {
       const response = await axiosInstance(`/books/${id}`);
       setBookData(response.data);
       setBase64IMG(response.data.book_img); // Set the existing image as Base64
-      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -174,7 +173,7 @@ const AddBooks = () => {
             id="availability"
             name="availability"
             className="mx-3 w-5 h-5"
-            checked={bookData?.availability}
+            checked={bookData?.availability || false}
             onChange={handleBookChange}
           />
         </div>
