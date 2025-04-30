@@ -4,6 +4,7 @@ import Button from "../components/Button";
 import { useNavigate } from "react-router";
 import { PencilIcon, Trash2Icon } from "lucide-react";
 import Modal from "../components/Modal";
+import { toast } from "react-toastify";
 
 export interface Book {
   title?: string;
@@ -42,8 +43,26 @@ const Books = () => {
       setBookData((prevBooks) =>
         prevBooks.filter((book) => book.id !== selectedBookId)
       );
+      toast.success(`Book Deleted Successfully`, {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
       setIsModalOpen(false);
     } catch (error) {
+      toast.error("Failed, Please try again", {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+      });
       console.log(error);
     }
   };
