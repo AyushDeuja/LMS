@@ -29,6 +29,18 @@ const Books = () => {
     fetchBooks();
   }, []);
 
+  //delete logic here
+  const handleDelete = async (id: number) => {
+    try {
+      await axiosInstance.delete(`/books/${id}`, {
+        method: "DELETE",
+      });
+      setBookData((prevBooks) => prevBooks.filter((book) => book.id !== id));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="h-full w-full flex flex-col">
       <div className="flex items-center justify-between p-4">
@@ -91,7 +103,10 @@ const Books = () => {
                       className="text-blue-400 cursor-pointer"
                       onClick={() => navigate(`/edit-book/${book.id}`)}
                     />
-                    <Trash2Icon className="text-red-400 cursor-pointer" />
+                    <Trash2Icon
+                      className="text-red-400 cursor-pointer"
+                      onClick={() => handleDelete(book.id as number)}
+                    />
                   </div>
                 </td>
               </tr>

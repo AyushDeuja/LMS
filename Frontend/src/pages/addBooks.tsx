@@ -82,9 +82,7 @@ const AddBooks = () => {
   };
 
   useEffect(() => {
-    if (id) {
-      fetchBookFromId();
-    }
+    fetchBookFromId();
   }, [id]);
 
   const handleBookChange = (e: any) => {
