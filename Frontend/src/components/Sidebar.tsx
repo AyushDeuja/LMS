@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 import Button from "./Button";
 import SidebarItem from "./SidebarItem";
-import { LogOut } from "lucide-react";
+import { BookTextIcon, LogOut, UserIcon, WalletCardsIcon } from "lucide-react";
 import Modal from "./Modal";
 import { useState } from "react";
 
@@ -32,9 +32,13 @@ const Sidebar = () => {
       {/* Menu Items */}
       <nav className="p-6 flex-1">
         <ul className="space-y-3 text-lg">
-          <SidebarItem content="📚 Books" to="/books" />
-          <SidebarItem content="👥 Members" to="/members" />
-          <SidebarItem content="💳 Transactions" to="/transactions" />
+          <SidebarItem icon={<BookTextIcon />} content="Books" to="/books" />
+          <SidebarItem icon={<UserIcon />} content="Members" to="/members" />
+          <SidebarItem
+            icon={<WalletCardsIcon />}
+            content="Transactions"
+            to="/transactions"
+          />
         </ul>
       </nav>
 

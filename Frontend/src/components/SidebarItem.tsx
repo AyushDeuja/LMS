@@ -3,9 +3,10 @@ import { NavLink } from "react-router";
 interface SidebarItemProps {
   content: string;
   to: string;
+  icon?: React.JSX.Element;
 }
 
-const SidebarItem = ({ content, to }: SidebarItemProps) => {
+const SidebarItem = ({ content, to, icon }: SidebarItemProps) => {
   return (
     <>
       <li className="w-full px-4">
@@ -19,7 +20,8 @@ const SidebarItem = ({ content, to }: SidebarItemProps) => {
             }`
           }
         >
-          <p className="text-lg">{content}</p>
+          {icon}
+          <p className="text-lg px-2">{content}</p>
         </NavLink>
       </li>
     </>
