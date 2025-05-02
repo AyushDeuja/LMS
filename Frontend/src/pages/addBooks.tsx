@@ -108,10 +108,10 @@ const AddBooks = () => {
   };
 
   return (
-    <div className="flex justify-center  min-h-full ">
-      <div className="bg-white shadow-lg rounded-lg p-5 w-[500px] max-h-[90vh] overflow-y-auto">
+    <div className="flex justify-center  ">
+      <div className="bg-white shadow-lg rounded-lg p-5 w-[500px] max-h-[90vh] ">
         <h1
-          className=" font-bold text-center mb-2 flex items-center cursor-pointer "
+          className=" font-bold text-center mb-5 flex items-center cursor-pointer text-gray-700 "
           onClick={() => navigate("/books")}
         >
           <ArrowLeft />
@@ -121,7 +121,7 @@ const AddBooks = () => {
           {id ? "Edit Book" : "Add New Book"}
         </h1>
         <form className="space-y-6" onSubmit={handleSubmit}>
-          <div className="relative">
+          <div>
             <Input
               name="title"
               type="text"
@@ -200,12 +200,6 @@ const AddBooks = () => {
             className="w-full bg-indigo-700 hover:bg-indigo-800 text-white py-2 rounded-md"
           />
         </form>
-        <Button
-          label="Back To Books"
-          type="button"
-          className="w-full mt-4 bg-gray-500 hover:bg-gray-600 text-white py-2 rounded-md"
-          onClick={() => navigate("/books")}
-        />
       </div>
     </div>
   );

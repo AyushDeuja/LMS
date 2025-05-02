@@ -57,6 +57,7 @@ const Sidebar = () => {
         onConfirm={handleLogOut}
         content="Are you sure you want to Log Out?"
         title="Log Out"
+        primaryButtonLabel="Log Out"
       />
     </aside>
   );

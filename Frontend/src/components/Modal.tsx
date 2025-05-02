@@ -6,6 +6,7 @@ interface ModalProps {
   onConfirm: () => void;
   content: string;
   title: string;
+  primaryButtonLabel?: string;
 }
 
 export default function Modal({
@@ -14,10 +15,11 @@ export default function Modal({
   onConfirm,
   content,
   title,
+  primaryButtonLabel = "Delete",
 }: ModalProps) {
   return (
     <div
-      className={`w-screen h-screen bg-[#00000079] flex justify-center items-center absolute inset-0 ${
+      className={`w-screen h-screen bg-[#00000079] flex justify-center items-center absolute inset-0 z-2 ${
         isModalOpen ? "block" : "hidden"
       }`}
     >
@@ -38,7 +40,7 @@ export default function Modal({
           <Button
             className="w-fit px-2 bg-none bg-red-500"
             type="button"
-            label="Delete"
+            label={primaryButtonLabel}
             onClick={onConfirm}
           />
         </div>
