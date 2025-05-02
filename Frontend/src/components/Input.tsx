@@ -30,7 +30,7 @@ const Input = ({
 
   return (
     <div>
-      <label htmlFor={name} className="block text-sm font-medium text-gray-700">
+      <label htmlFor={name} className="block font-bold text-sm text-gray-700">
         {label}
       </label>
       <div className="flex items-center justify-between w-full px-2 py-2 border border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">

@@ -89,7 +89,7 @@ const Books = () => {
         />
       </div>
       <div className="flex-1 overflow-x-auto overflow-y-auto">
-        <table className="w-full border-collapse bg-white shadow-lg rounded-lg">
+        <table className="w-full border-collapse bg-white shadow-xl rounded-lg">
           <thead className="sticky top-0 bg-gradient-to-l from-indigo-700 to-purple-600 text-white z-10">
             <tr>
               <th className="py-3 px-6 text-left">Title</th>
