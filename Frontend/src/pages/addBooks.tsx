@@ -179,7 +179,7 @@ const AddBooks = () => {
               type="checkbox"
               id="availability"
               name="availability"
-              className="mx-3 w-5 h-5"
+              className="mx-3 w-5 h-5 accent-indigo-700"
               checked={bookData?.availability || false}
               onChange={handleBookChange}
             />
