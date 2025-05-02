@@ -5,14 +5,7 @@ import { axiosInstance } from "../utils/axiosInterceptor";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router";
 import { Book } from "./books";
-import {
-  BookOpen,
-  User,
-  Layers,
-  Image,
-  CheckSquare,
-  ArrowLeft,
-} from "lucide-react";
+import { Image, ArrowLeft } from "lucide-react";
 
 const AddBooks = () => {
   const navigate = useNavigate();
