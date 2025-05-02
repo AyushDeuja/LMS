@@ -8,7 +8,7 @@ const AppLayout = () => {
       <Sidebar />
       {/* Main Content */}
       <main className="w-full h-full flex flex-col justify-between overflow-y-auto">
-        <div className="w-full h-full p-4 overflow-hidden bg-gray-200">
+        <div className="w-full h-full p-4 overflow-hidden bg-gray-300">
           <Outlet />
         </div>
         {/* Footer */}
