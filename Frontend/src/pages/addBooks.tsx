@@ -5,7 +5,14 @@ import { axiosInstance } from "../utils/axiosInterceptor";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router";
 import { Book } from "./books";
-import { BookOpen, User, Layers, Image, CheckSquare } from "lucide-react";
+import {
+  BookOpen,
+  User,
+  Layers,
+  Image,
+  CheckSquare,
+  ArrowLeft,
+} from "lucide-react";
 
 const AddBooks = () => {
   const navigate = useNavigate();
@@ -102,8 +109,15 @@ const AddBooks = () => {
 
   return (
     <div className="flex justify-center  min-h-full ">
-      <div className="bg-white shadow-lg rounded-lg p-8 w-[500px] max-h-[90vh] overflow-y-auto">
-        <h1 className="text-2xl font-bold text-center mb-6 text-indigo-700">
+      <div className="bg-white shadow-lg rounded-lg p-5 w-[500px] max-h-[90vh] overflow-y-auto">
+        <h1
+          className=" font-bold text-center mb-2 flex items-center cursor-pointer "
+          onClick={() => navigate("/books")}
+        >
+          <ArrowLeft />
+          <span className="px-2">Back to books</span>
+        </h1>
+        <h1 className="text-2xl font-bold text-center  text-indigo-700">
           {id ? "Edit Book" : "Add New Book"}
         </h1>
         <form className="space-y-6" onSubmit={handleSubmit}>
