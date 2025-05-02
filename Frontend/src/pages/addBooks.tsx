@@ -5,6 +5,7 @@ import { axiosInstance } from "../utils/axiosInterceptor";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router";
 import { Book } from "./books";
+import { BookOpen, User, Layers, Image, CheckSquare } from "lucide-react";
 
 const AddBooks = () => {
   const navigate = useNavigate();
@@ -100,87 +101,98 @@ const AddBooks = () => {
   };
 
   return (
-    <div>
-      <div className="flex items-center justify-between p-4">
-        <h1 className="text-2xl font-bold text-center">
+    <div className="flex justify-center  min-h-full ">
+      <div className="bg-white shadow-lg rounded-lg p-8 w-[500px] max-h-[90vh] overflow-y-auto">
+        <h1 className="text-2xl font-bold text-center mb-6 text-indigo-700">
           {id ? "Edit Book" : "Add New Book"}
         </h1>
+        <form className="space-y-6" onSubmit={handleSubmit}>
+          <div className="relative">
+            <Input
+              name="title"
+              type="text"
+              id="title"
+              label="Title"
+              value={bookData?.title || ""}
+              onChange={handleBookChange}
+            />
+          </div>
+          <div className="relative">
+            <Input
+              name="author"
+              type="text"
+              id="author"
+              label="Author"
+              value={bookData?.author || ""}
+              onChange={handleBookChange}
+            />
+          </div>
+          <div className="relative">
+            <Input
+              name="quantity"
+              type="number"
+              id="quantity"
+              label="Quantity"
+              value={bookData?.quantity || ""}
+              onChange={handleBookChange}
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="book_img"
+              className="block text-sm font-medium text-gray-700"
+            >
+              <Image className="inline-block mr-2 text-gray-500" />
+              Book Image
+            </label>
+            <input
+              type="file"
+              id="book_img"
+              name="book_img"
+              accept="image/*"
+              className="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer focus:outline-none"
+              onChange={handleBookChange}
+            />
+            {(base64IMG || bookData?.book_img) && (
+              <img
+                src={(base64IMG as string) || bookData?.book_img}
+                alt="Preview"
+                className="mt-4 w-32 h-32 object-cover rounded-md mx-auto"
+              />
+            )}
+          </div>
+          <div className="flex items-center">
+            <label
+              htmlFor="availability"
+              className="text-gray-700 text-sm font-bold"
+            >
+              Availability:
+            </label>
+            <input
+              type="checkbox"
+              id="availability"
+              name="availability"
+              className="mx-3 w-5 h-5"
+              checked={bookData?.availability || false}
+              onChange={handleBookChange}
+            />
+          </div>
+          {errorMessage && (
+            <p className="text-red-500 text-lg text-center">{errorMessage}</p>
+          )}
+          <Button
+            label={id ? "Update Book" : "Add Book"}
+            type="submit"
+            className="w-full bg-indigo-700 hover:bg-indigo-800 text-white py-2 rounded-md"
+          />
+        </form>
         <Button
           label="Back To Books"
           type="button"
-          className="bg-blue-600 p-4"
+          className="w-full mt-4 bg-gray-500 hover:bg-gray-600 text-white py-2 rounded-md"
           onClick={() => navigate("/books")}
         />
       </div>
-      <form className="space-y-4" onSubmit={handleSubmit}>
-        <Input
-          name="title"
-          type="text"
-          id="title"
-          label="Title"
-          value={bookData?.title || ""}
-          onChange={handleBookChange}
-        />
-        <Input
-          name="author"
-          type="text"
-          id="author"
-          label="Author"
-          value={bookData?.author || ""}
-          onChange={handleBookChange}
-        />
-        <Input
-          name="quantity"
-          type="number"
-          id="quantity"
-          label="Quantity"
-          value={bookData?.quantity || ""}
-          onChange={handleBookChange}
-        />
-        <div>
-          <label
-            htmlFor="book_img"
-            className="block text-sm font-medium text-gray-700"
-          >
-            Book Image
-          </label>
-          <input
-            type="file"
-            id="book_img"
-            name="book_img"
-            accept="image/*"
-            className="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer focus:outline-none"
-            onChange={handleBookChange}
-          />
-          {(base64IMG || bookData?.book_img) && (
-            <img
-              src={(base64IMG as string) || bookData?.book_img}
-              alt="Preview"
-              className="mt-4 w-32 h-32 object-cover rounded-md"
-            />
-          )}
-        </div>
-        <div className="flex items-center">
-          <label
-            htmlFor="availability"
-            className="text-gray-700 text-sm font-bold"
-          >
-            Availability:
-          </label>
-          <input
-            type="checkbox"
-            id="availability"
-            name="availability"
-            className="mx-3 w-5 h-5"
-            checked={bookData?.availability || false}
-            onChange={handleBookChange}
-          />
-        </div>
-        {errorMessage && (
-          <p className="text-red-500 text-lg text-center">{errorMessage}</p>
-        )}
-        <Button label={id ? "Update Book" : "Add Book"} type="submit" />
-      </form>
     </div>
   );
 };
