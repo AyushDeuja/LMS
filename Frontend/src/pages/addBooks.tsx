@@ -101,7 +101,7 @@ const AddBooks = () => {
   };
 
   return (
-    <div className="flex justify-center mt-1">
+    <div className="flex justify-center h-[90vh] items-center">
       <div className="bg-white shadow-lg rounded-lg p-5 w-[500px] max-h-[90vh] ">
         <h1
           className=" font-bold text-center mb-5 flex items-center cursor-pointer text-gray-700 "
