@@ -1,4 +1,5 @@
-import { createContext, useMemo, useState } from "react";
+import { createContext, useContext, useMemo, useState } from "react";
+import { toast } from "react-toastify";
 
 //themeContext for implementing dark mode and light mode
 // context provider stores and manipulates the context data
@@ -25,4 +26,12 @@ const ThemeProvider = ({ children }: { children: React.ReactElement }) => {
   );
 };
 
-export { ThemeContext, ThemeProvider };
+const useTheme = () => {
+  const context = useContext(ThemeContext);
+  if (!context) {
+    toast.error("Context not available.");
+    return {};
+  }
+  return context;
+};
+export { useTheme, ThemeProvider };
