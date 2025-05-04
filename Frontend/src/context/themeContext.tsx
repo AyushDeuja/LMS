@@ -6,17 +6,20 @@ type Theme = "light" | "dark";
 
 interface ThemeContextValues {
   theme: Theme;
-  setTheme: (value: Theme) => void;
+  toggleTheme: () => void;
 }
 
 const ThemeContext = createContext<ThemeContextValues>({
   theme: "light",
-  setTheme: () => {},
+  toggleTheme: () => {},
 });
 
 const ThemeProvider = ({ children }: { children: React.ReactElement }) => {
   const [theme, setTheme] = useState<Theme>("light");
-  const value = useMemo(() => ({ theme, setTheme }), [theme]);
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+  };
+  const value = useMemo(() => ({ theme, toggleTheme }), [theme]);
   return (
     <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
   );
