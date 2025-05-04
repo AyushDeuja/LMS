@@ -10,11 +10,11 @@ import {
   UserIcon,
 } from "lucide-react";
 import Modal from "./Modal";
-import { useContext, useState } from "react";
-import { ThemeContext } from "../context/themeContext";
+import { useState } from "react";
+import { useTheme } from "../context/themeContext";
 
 const Sidebar = () => {
-  const { theme, toggleTheme } = useContext(ThemeContext);
+  const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const [showConfirmation, setShowConfirmation] = useState(false);
 
