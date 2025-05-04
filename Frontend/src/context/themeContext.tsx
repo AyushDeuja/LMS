@@ -5,16 +5,20 @@ import { createContext, useState } from "react";
 
 interface ThemeContextValues {
   theme?: string;
+  setTheme?: (value: string) => void;
 }
 
 const ThemeContext = createContext<ThemeContextValues>({
   theme: "light",
+  setTheme: () => {},
 });
 
 const ThemeProvider = ({ children }: { children: React.ReactElement }) => {
   const [theme, setTheme] = useState("light");
   return (
-    <ThemeContext.Provider value={{ theme }}>{children}</ThemeContext.Provider>
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      {children}
+    </ThemeContext.Provider>
   );
 };
 

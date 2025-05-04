@@ -14,7 +14,7 @@ import { useContext, useState } from "react";
 import { ThemeContext } from "../context/themeContext";
 
 const Sidebar = () => {
-  const { theme } = useContext(ThemeContext);
+  const { theme, setTheme } = useContext(ThemeContext);
   const navigate = useNavigate();
   const [showConfirmation, setShowConfirmation] = useState(false);
 
@@ -37,9 +37,19 @@ const Sidebar = () => {
       <div className="p-3 py-6   border-b border-white/20 flex items-center justify-between">
         <h1 className="text-2xl font-extrabold tracking-wide">📘 LMS APP</h1>
         {theme === "light" ? (
-          <MoonStarIcon onClick={() => console.log("light")} />
+          <MoonStarIcon
+            onClick={() => {
+              setTheme("dark");
+              console.log("dark");
+            }}
+          />
         ) : (
-          <SunIcon onClick={() => console.log("dark")} />
+          <SunIcon
+            onClick={() => {
+              setTheme("light");
+              console.log("light");
+            }}
+          />
         )}
       </div>
 
