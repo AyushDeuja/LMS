@@ -1,11 +1,20 @@
 import { useNavigate } from "react-router";
 import Button from "./Button";
 import SidebarItem from "./SidebarItem";
-import { Banknote, BookTextIcon, LogOut, UserIcon } from "lucide-react";
+import {
+  Banknote,
+  BookTextIcon,
+  LogOut,
+  MoonStarIcon,
+  SunIcon,
+  UserIcon,
+} from "lucide-react";
 import Modal from "./Modal";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ThemeContext } from "../context/themeContext";
 
 const Sidebar = () => {
+  const { theme } = useContext(ThemeContext);
   const navigate = useNavigate();
   const [showConfirmation, setShowConfirmation] = useState(false);
 
@@ -25,8 +34,13 @@ const Sidebar = () => {
   return (
     <aside className="w-1/4 h-full bg-gradient-to-b from-indigo-700 to-purple-600 text-white shadow-2xl flex flex-col">
       {/* Title and Logo */}
-      <div className="p-6 border-b border-white/20">
-        <h1 className="text-3xl font-extrabold tracking-wide">📘 LMS APP</h1>
+      <div className="p-3 py-6   border-b border-white/20 flex items-center justify-between">
+        <h1 className="text-2xl font-extrabold tracking-wide">📘 LMS APP</h1>
+        {theme === "light" ? (
+          <MoonStarIcon onClick={() => console.log("light")} />
+        ) : (
+          <SunIcon onClick={() => console.log("dark")} />
+        )}
       </div>
 
       {/* Menu Items */}

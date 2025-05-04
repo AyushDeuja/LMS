@@ -7,7 +7,7 @@ interface ThemeContextValues {
   theme?: string;
 }
 
-const ThemeContext = createContext({
+const ThemeContext = createContext<ThemeContextValues>({
   theme: "light",
 });
 
