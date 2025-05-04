@@ -34,7 +34,7 @@ const Sidebar = () => {
   return (
     <aside className="w-1/4 h-full bg-gradient-to-b from-indigo-700 to-purple-600 text-white shadow-2xl flex flex-col">
       {/* Title and Logo */}
-      <div className="p-3 py-6   border-b border-white/20 flex items-center justify-between">
+      <div className="p-3 py-6 border-b border-white/20 flex items-center justify-between">
         <h1 className="text-2xl font-extrabold tracking-wide">📘 LMS APP</h1>
         {theme === "light" ? (
           <MoonStarIcon
@@ -42,9 +42,11 @@ const Sidebar = () => {
               setTheme("dark");
               console.log("dark");
             }}
+            className="cursor-pointer"
           />
         ) : (
           <SunIcon
+            className="text-yellow-300 cursor-pointer"
             onClick={() => {
               setTheme("light");
               console.log("light");

@@ -5,7 +5,7 @@ import { createContext, useState } from "react";
 
 interface ThemeContextValues {
   theme?: string;
-  setTheme?: (value: string) => void;
+  setTheme: (value: string) => void;
 }
 
 const ThemeContext = createContext<ThemeContextValues>({
