@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import { PencilIcon, Trash2Icon } from "lucide-react";
 import Modal from "../components/Modal";
 import { toast } from "react-toastify";
+import { useBook } from "../context/booksContext";
 
 export interface Book {
   title?: string;
@@ -16,23 +17,10 @@ export interface Book {
 }
 
 const Books = () => {
+  const { bookData } = useBook();
   const navigate = useNavigate();
-  const [bookData, setBookData] = useState<Book[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedBookId, setSelectedBookId] = useState<number | null>(null);
-
-  const fetchBooks = async () => {
-    try {
-      const response = await axiosInstance(`/books`);
-      setBookData(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchBooks();
-  }, []);
 
   const handleDelete = async () => {
     if (selectedBookId === null) return;

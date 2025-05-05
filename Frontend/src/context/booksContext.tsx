@@ -23,6 +23,7 @@ const BookProvider = ({ children }: { children: React.ReactElement }) => {
   const fetchBooks = async () => {
     try {
       const response = await axiosInstance(`/books`);
+      console.log(response.data);
       setBookData(response.data);
     } catch (error) {
       console.log(error);
