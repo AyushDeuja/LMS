@@ -3,6 +3,7 @@ import Button from "../components/Button";
 import Modal from "../components/Modal";
 import { useNavigate } from "react-router";
 import { useMember } from "../context/membersContext";
+import { useState } from "react";
 
 export interface Member {
   name?: string;
@@ -15,6 +16,25 @@ export interface Member {
 const Members = () => {
   const navigate = useNavigate();
   const { memberData, onDelete } = useMember();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedMemberId, setSelectedMemberId] = useState<number | null>(null);
+
+  const handleDelete = async () => {
+    if (selectedMemberId) {
+      onDelete(selectedMemberId);
+    }
+    setIsModalOpen(false);
+  };
+
+  const openModal = (id: number) => {
+    setSelectedMemberId(id);
+    setIsModalOpen(true);
+  };
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedMemberId(null);
+  };
+
   return (
     <div>
       <div className="h-full w-full flex flex-col">
@@ -65,7 +85,7 @@ const Members = () => {
                       />
                       <Trash2Icon
                         className="text-red-400 cursor-pointer"
-                        // onClick={() => openModal(member.id as number)}
+                        onClick={() => openModal(member.id as number)}
                       />
                     </div>
                   </td>
@@ -74,14 +94,14 @@ const Members = () => {
             </tbody>
           </table>
         </div>
-        {/* <Modal
+        <Modal
           isModalOpen={isModalOpen}
           onClose={closeModal}
           onConfirm={handleDelete}
           content="Are you sure you want to delete this member? This action cannot be
         undone."
           title="Delete"
-        /> */}
+        />
       </div>
     </div>
   );
