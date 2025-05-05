@@ -1,8 +1,13 @@
 import { createContext, useContext, useMemo, useState } from "react";
 
-//BookContext for implementing dark mode and light mode
-// context provider stores and manipulates the context data
-type Book = "light" | "dark";
+interface Book {
+  title?: string;
+  author?: string;
+  id?: number;
+  quantity?: number;
+  availability?: boolean;
+  book_img?: string;
+}
 
 interface BookContextValues {
   bookData: Book[];
@@ -13,11 +18,9 @@ const BookContext = createContext<BookContextValues>({
 });
 
 const BookProvider = ({ children }: { children: React.ReactElement }) => {
-  const [Book, setBook] = useState<Book>("light");
-  const toggleBook = () => {
-    setBook((prevBook) => (prevBook === "light" ? "dark" : "light"));
-  };
-  const value = useMemo(() => ({ Book, toggleBook }), [Book]);
+  const [Book, setBookData] = useState<Book[]>([]);
+
+  const value = useMemo(() => ({ bookData }), [bookData]);
   return <BookContext.Provider value={value}>{children}</BookContext.Provider>;
 };
 
