@@ -16,6 +16,7 @@ export interface Member {
 const Members = () => {
   const navigate = useNavigate();
   const { memberData, onDelete } = useMember();
+  console.log(memberData);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedMemberId, setSelectedMemberId] = useState<number | null>(null);
 
@@ -104,6 +105,7 @@ const Members = () => {
           onConfirm={handleDelete}
           content={`Are you sure you want to remove the member "${selectedMember?.name}"? This action cannot be undone.`}
           title={`Remove ${selectedMember?.name || "Member"}`}
+          primaryButtonLabel="Remove"
         />
       </div>
     </div>

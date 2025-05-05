@@ -6,13 +6,16 @@ import { BrowserRouter } from "react-router";
 import { ToastContainer } from "react-toastify";
 import { ThemeProvider } from "./context/themeContext.tsx";
 import { BookProvider } from "./context/booksContext";
+import { MemberProvider } from "./context/membersContext.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
       <ThemeProvider>
         <BookProvider>
-          <App />
+          <MemberProvider>
+            <App />
+          </MemberProvider>
         </BookProvider>
       </ThemeProvider>
       <ToastContainer autoClose={500} pauseOnHover={true} />

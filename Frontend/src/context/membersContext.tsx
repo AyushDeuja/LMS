@@ -28,6 +28,7 @@ const MemberProvider = ({ children }: { children: React.ReactElement }) => {
   const fetchMembers = async () => {
     try {
       const response = await axiosInstance(`/members`);
+      console.log(response.data);
       setMemberData(response.data);
     } catch (error) {
       console.log(error);
@@ -40,7 +41,7 @@ const MemberProvider = ({ children }: { children: React.ReactElement }) => {
 
   const onDelete = async (id: number) => {
     try {
-      await axiosInstance.delete(`/Members/${id}`);
+      await axiosInstance.delete(`/members/${id}`);
       const newData = [...memberData].filter((member) => member.id !== id);
       setMemberData(newData);
       toast.success(`Member Removed Successfully!`);
@@ -54,6 +55,7 @@ const MemberProvider = ({ children }: { children: React.ReactElement }) => {
 
   useEffect(() => {
     fetchMembers();
+    console.log("fetching");
   }, []);
 
   const value = useMemo(

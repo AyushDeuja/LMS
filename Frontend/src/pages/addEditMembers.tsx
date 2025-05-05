@@ -56,7 +56,6 @@ const AddEditMembers = () => {
 
   const handleMemberChange = (e: any) => {
     const { name, value } = e.target;
-
     setMemberData((prevData) => ({
       ...prevData,
       [name]: value,
