@@ -6,12 +6,14 @@ import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router";
 import { Book } from "./books";
 import { Image, ArrowLeft } from "lucide-react";
+import { useBook } from "../context/booksContext";
 
 const AddBooks = () => {
   const navigate = useNavigate();
   const [bookData, setBookData] = useState<Book>();
   const [errorMessage, setErrorMessage] = useState("");
   const [base64IMG, setBase64IMG] = useState<string | ArrayBuffer | null>(null);
+  const { updateBookData } = useBook();
 
   const { id } = useParams();
 
@@ -47,6 +49,7 @@ const AddBooks = () => {
       });
 
       toast.success(`Book ${id ? "Updated" : "Added"} Successfully`);
+      updateBookData(parsedFormValues as Book); // Update the book data in context
       navigate("/books");
     } catch (err: any) {
       setErrorMessage(
