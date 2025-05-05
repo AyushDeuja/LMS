@@ -35,16 +35,20 @@ const Members = () => {
     setSelectedMemberId(null);
   };
 
+  const selectedMember = memberData.find(
+    (member) => member.id === selectedMemberId
+  );
+
   return (
     <div>
       <div className="h-full w-full flex flex-col">
         <div className="flex items-center justify-between p-4">
           <h1 className="text-2xl font-bold text-center">Members</h1>
           <Button
-            label="Add Book"
+            label="Add Member"
             type="button"
             className="p-4"
-            onClick={() => navigate("/add-book")}
+            onClick={() => navigate("/add-member")}
           />
         </div>
         <div className="flex-1 overflow-x-auto overflow-y-auto">
@@ -98,9 +102,8 @@ const Members = () => {
           isModalOpen={isModalOpen}
           onClose={closeModal}
           onConfirm={handleDelete}
-          content="Are you sure you want to delete this member? This action cannot be
-        undone."
-          title="Delete"
+          content={`Are you sure you want to remove the member "${selectedMember?.name}"? This action cannot be undone.`}
+          title={`Remove ${selectedMember?.name || "Member"}`}
         />
       </div>
     </div>

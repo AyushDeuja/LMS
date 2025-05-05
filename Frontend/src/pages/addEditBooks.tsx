@@ -111,7 +111,7 @@ const AddBooks = () => {
               onChange={handleBookChange}
             />
           </div>
-          <div className="relative">
+          <div>
             <Input
               name="author"
               type="text"
@@ -121,7 +121,7 @@ const AddBooks = () => {
               onChange={handleBookChange}
             />
           </div>
-          <div className="relative">
+          <div>
             <Input
               name="quantity"
               type="number"

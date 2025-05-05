@@ -36,6 +36,7 @@ const Books = () => {
     setIsModalOpen(false);
     setSelectedBookId(null);
   };
+  const selectedBook = bookData.find((book) => book.id === selectedBookId);
 
   return (
     <div className="h-full w-full flex flex-col">
@@ -114,9 +115,8 @@ const Books = () => {
         isModalOpen={isModalOpen}
         onClose={closeModal}
         onConfirm={handleDelete}
-        content="Are you sure you want to delete this book? This action cannot be
-        undone."
-        title="Delete"
+        content={`Are you sure you want to delete the book "${selectedBook?.title}"? This action cannot be undone.`}
+        title={`Delete ${selectedBook?.title || "Book"}`}
       />
     </div>
   );

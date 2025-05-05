@@ -4,15 +4,14 @@ import Input from "../components/Input";
 import { axiosInstance } from "../utils/axiosInterceptor";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router";
-import { Book } from "./books";
-import { Image, ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { useMember } from "../context/membersContext";
+import { Member } from "./members";
 
 const AddEditMembers = () => {
   const navigate = useNavigate();
-  const [memberData, setMemberData] = useState<Book>();
+  const [memberData, setMemberData] = useState<Member>();
   const [errorMessage, setErrorMessage] = useState("");
-
   const { updateMemberData } = useMember();
 
   const { id } = useParams();
@@ -20,10 +19,9 @@ const AddEditMembers = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-
     const formValues = Object.fromEntries(formData.entries());
 
-    const url = id ? `/books/${id}` : "/books";
+    const url = id ? `/members/${id}` : "/members";
 
     try {
       await axiosInstance(url, {
@@ -31,9 +29,9 @@ const AddEditMembers = () => {
         data: formValues,
       });
 
-      toast.success(`Book ${id ? "Updated" : "Added"} Successfully`);
-      updateMemberData(formValues as Book); // Update the book data in context
-      navigate("/books");
+      toast.success(`Member ${id ? "Updated" : "Added"} Successfully`);
+      updateMemberData(formValues as Member); // Update the book data in context
+      navigate("/members");
     } catch (err: any) {
       setErrorMessage(
         err.response?.data?.message || "Failed, Please try again"
@@ -42,32 +40,27 @@ const AddEditMembers = () => {
     }
   };
 
-  const fetchBookFromId = async () => {
+  const fetchMemberFromId = async () => {
     if (!id) return; // Only fetch if an ID is present
     try {
-      const response = await axiosInstance(`/books/${id}`);
+      const response = await axiosInstance(`/members/${id}`);
       setMemberData(response.data);
-      setBase64IMG(response.data.book_img); // Set the existing image as Base64
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    fetchBookFromId();
+    fetchMemberFromId();
   }, [id]);
 
-  const handleBookChange = (e: any) => {
-    const { name, value, checked, type, files } = e.target;
+  const handleMemberChange = (e: any) => {
+    const { name, value } = e.target;
 
-    if (name === "book_img" && files && files[0]) {
-      convertToBase64(files[0]); // Convert the selected file to Base64
-    } else {
-      setMemberData((prevData) => ({
-        ...prevData,
-        [name]: type === "checkbox" ? checked : value,
-      }));
-    }
+    setMemberData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   return (
@@ -75,90 +68,61 @@ const AddEditMembers = () => {
       <div className="bg-white shadow-lg rounded-lg p-5 w-[500px] max-h-[90vh] ">
         <h1
           className=" font-bold text-center mb-5 flex items-center cursor-pointer text-gray-700 "
-          onClick={() => navigate("/books")}
+          onClick={() => navigate("/members")}
         >
           <ArrowLeft />
-          <span className="px-2">Back to books</span>
+          <span className="px-2">Back to members</span>
         </h1>
         <h1 className="text-2xl font-bold text-center  text-indigo-700">
-          {id ? "Edit Book" : "Add New Book"}
+          {id ? "Edit Member" : "Add New Member"}
         </h1>
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div>
             <Input
-              name="title"
+              name="name"
               type="text"
-              id="title"
-              label="Title"
-              value={MemberData?.title || ""}
-              onChange={handleBookChange}
-            />
-          </div>
-          <div className="relative">
-            <Input
-              name="author"
-              type="text"
-              id="author"
-              label="Author"
-              value={MemberData?.author || ""}
-              onChange={handleBookChange}
-            />
-          </div>
-          <div className="relative">
-            <Input
-              name="quantity"
-              type="number"
-              id="quantity"
-              label="Quantity"
-              value={MemberData?.quantity || ""}
-              onChange={handleBookChange}
+              id="name"
+              label="name"
+              value={memberData?.name || ""}
+              onChange={handleMemberChange}
             />
           </div>
           <div>
-            <label
-              htmlFor="book_img"
-              className="block text-sm font-medium text-gray-700"
-            >
-              <Image className="inline-block mr-2 text-gray-500" />
-              Book Image
-            </label>
-            <input
-              type="file"
-              id="book_img"
-              name="book_img"
-              accept="image/*"
-              className="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer focus:outline-none"
-              onChange={handleBookChange}
-            />
-            {(base64IMG || MemberData?.book_img) && (
-              <img
-                src={(base64IMG as string) || MemberData?.book_img}
-                alt="Preview"
-                className="mt-4 w-32 h-32 object-cover rounded-md mx-auto"
-              />
-            )}
-          </div>
-          <div className="flex items-center">
-            <label
-              htmlFor="availability"
-              className="text-gray-700 text-sm font-bold"
-            >
-              Availability:
-            </label>
-            <input
-              type="checkbox"
-              id="availability"
-              name="availability"
-              className="mx-3 w-5 h-5 accent-indigo-700"
-              checked={MemberData?.availability || false}
-              onChange={handleBookChange}
+            <Input
+              name="address"
+              type="text"
+              id="address"
+              label="address"
+              value={memberData?.address || ""}
+              onChange={handleMemberChange}
             />
           </div>
+          <div>
+            <Input
+              name="email"
+              type="email"
+              id="email"
+              label="email"
+              value={memberData?.email || ""}
+              onChange={handleMemberChange}
+            />
+          </div>
+          <div>
+            <Input
+              name="mobile"
+              type="mobile"
+              id="mobile"
+              label="mobile"
+              value={memberData?.mobile || ""}
+              onChange={handleMemberChange}
+            />
+          </div>
+
           {errorMessage && (
             <p className="text-red-500 text-lg text-center">{errorMessage}</p>
           )}
           <Button
-            label={id ? "Update Book" : "Add Book"}
+            label={id ? "Update Member" : "Add Member"}
             type="submit"
             className="w-full bg-indigo-700 hover:bg-indigo-800 text-white py-2 rounded-md"
           />
