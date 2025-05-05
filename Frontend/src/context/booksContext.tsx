@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { axiosInstance } from "../utils/axiosInterceptor";
+import { toast } from "react-toastify";
 
 interface Book {
   title?: string;
@@ -24,12 +25,26 @@ const BookProvider = ({ children }: { children: React.ReactElement }) => {
   const fetchBooks = async () => {
     try {
       const response = await axiosInstance(`/books`);
-      console.log(response.data);
       setBookData(response.data);
     } catch (error) {
       console.log(error);
     }
   };
+
+  const onDelete = async (id: number) => {
+    try {
+      await axiosInstance.delete(`/books/${id}`);
+      const newData = [...bookData].filter((book) => book.id !== id);
+      setBookData(newData);
+      toast.success(`Book Deleted Successfully!`);
+    } catch (error: any) {
+      toast.error(
+        error?.response?.data?.message ??
+          "Failed to delete book, please try again."
+      );
+    }
+  };
+
   useEffect(() => {
     fetchBooks();
   }, []);
