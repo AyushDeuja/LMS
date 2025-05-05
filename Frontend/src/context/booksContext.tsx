@@ -12,6 +12,7 @@ interface Book {
 
 interface BookContextValues {
   bookData: Book[];
+  handleDelete: (id: number) => void;
 }
 
 const BookContext = createContext<BookContextValues>({

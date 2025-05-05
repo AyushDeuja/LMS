@@ -23,37 +23,23 @@ const Books = () => {
   const [selectedBookId, setSelectedBookId] = useState<number | null>(null);
 
   const handleDelete = async () => {
-    if (selectedBookId === null) return;
-    try {
-      await axiosInstance.delete(`/books/${selectedBookId}`, {
-        method: "DELETE",
-      });
-      setBookData((prevBooks) =>
-        prevBooks.filter((book) => book.id !== selectedBookId)
-      );
-      toast.success(`Book Deleted Successfully`, {
-        position: "top-right",
-        autoClose: 1000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-      });
-      setIsModalOpen(false);
-    } catch (error) {
-      toast.error("Failed, Please try again", {
-        position: "top-right",
-        autoClose: 1000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-      });
-      console.log(error);
-    }
-  };
+    if(selectedBookId)
+  }
+
+  // const handleDelete = async (id: number) => {
+  //   if (selectedBookId === null) return;
+  //   try {
+  //     await axiosInstance.delete(`/books/${id}`, {
+  //       method: "DELETE",
+  //     });
+  //     setBookData((prevBooks) => prevBooks.filter((book) => book.id !== id));
+  //     toast.success(`Book Deleted Successfully`);
+  //     setIsModalOpen(false);
+  //   } catch (error) {
+  //     toast.error("Failed, Please try again");
+  //     console.log(error);
+  //   }
+  // };
 
   const openModal = (id: number) => {
     setSelectedBookId(id);
