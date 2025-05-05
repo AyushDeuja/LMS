@@ -1,4 +1,5 @@
-import { createContext, useContext, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { axiosInstance } from "../utils/axiosInterceptor";
 
 interface Book {
   title?: string;
@@ -18,7 +19,18 @@ const BookContext = createContext<BookContextValues>({
 });
 
 const BookProvider = ({ children }: { children: React.ReactElement }) => {
-  const [Book, setBookData] = useState<Book[]>([]);
+  const [bookData, setBookData] = useState<Book[]>([]);
+  const fetchBooks = async () => {
+    try {
+      const response = await axiosInstance(`/books`);
+      setBookData(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    fetchBooks();
+  }, []);
 
   const value = useMemo(() => ({ bookData }), [bookData]);
   return <BookContext.Provider value={value}>{children}</BookContext.Provider>;
