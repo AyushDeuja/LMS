@@ -13,7 +13,7 @@ interface Member {
 interface MemberContextValues {
   memberData: Member[];
   onDelete: (id: number) => void;
-  updateMemberData: (updatedMember: Member) => void;
+  updateMemberData: () => void;
 }
 
 const MemberContext = createContext<MemberContextValues>({
@@ -35,8 +35,8 @@ const MemberProvider = ({ children }: { children: React.ReactElement }) => {
     }
   };
 
-  const updateMemberData = (updatedMember: Member) => {
-    setMemberData([...memberData, updatedMember]);
+  const updateMemberData = async () => {
+    await fetchMembers();
   };
 
   const onDelete = async (id: number) => {
