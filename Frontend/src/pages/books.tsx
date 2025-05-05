@@ -1,10 +1,8 @@
-import { useEffect, useState } from "react";
-import { axiosInstance } from "../utils/axiosInterceptor";
+import { useState } from "react";
 import Button from "../components/Button";
 import { useNavigate } from "react-router";
 import { PencilIcon, Trash2Icon } from "lucide-react";
 import Modal from "../components/Modal";
-import { toast } from "react-toastify";
 import { useBook } from "../context/booksContext";
 
 export interface Book {
@@ -17,29 +15,17 @@ export interface Book {
 }
 
 const Books = () => {
-  const { bookData } = useBook();
+  const { bookData, onDelete } = useBook();
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedBookId, setSelectedBookId] = useState<number | null>(null);
 
   const handleDelete = async () => {
-    if(selectedBookId)
-  }
-
-  // const handleDelete = async (id: number) => {
-  //   if (selectedBookId === null) return;
-  //   try {
-  //     await axiosInstance.delete(`/books/${id}`, {
-  //       method: "DELETE",
-  //     });
-  //     setBookData((prevBooks) => prevBooks.filter((book) => book.id !== id));
-  //     toast.success(`Book Deleted Successfully`);
-  //     setIsModalOpen(false);
-  //   } catch (error) {
-  //     toast.error("Failed, Please try again");
-  //     console.log(error);
-  //   }
-  // };
+    if (selectedBookId) {
+      onDelete(selectedBookId);
+    }
+    setIsModalOpen(false);
+  };
 
   const openModal = (id: number) => {
     setSelectedBookId(id);
