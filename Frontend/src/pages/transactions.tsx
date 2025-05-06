@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { PencilIcon, Trash2Icon } from "lucide-react";
 import Modal from "../components/Modal";
 import Button from "../components/Button";
 import { Transaction } from "./addEditTransactions";
+import { axiosInstance } from "../utils/axiosInterceptor";
 
 export default function Transactions() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -13,6 +14,20 @@ export default function Transactions() {
   const [transactionData, setTransactionData] = useState<Transaction[]>([]);
 
   const navigate = useNavigate();
+
+  const fetchTransaction = async () => {
+    try {
+      const response = await axiosInstance(`/transactions`);
+      console.log(response.data);
+      setTransactionData(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchTransaction();
+  }, []);
 
   const handleDelete = async () => {
     // if (selectedTransactionId) {
