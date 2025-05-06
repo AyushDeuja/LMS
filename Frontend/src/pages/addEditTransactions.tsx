@@ -6,6 +6,7 @@ import { ArrowLeft } from "lucide-react";
 import { useBook } from "../context/booksContext";
 import Input from "../components/Input";
 import Button from "../components/Button";
+import { useMember } from "../context/membersContext";
 
 type TRANSACTION_TYPE = "return" | "borrow";
 
@@ -22,6 +23,7 @@ const AddTransaction = () => {
   const [transactionData, setTransactionData] = useState<Transaction>();
   const [errorMessage, setErrorMessage] = useState("");
   const { bookData } = useBook();
+  const { memberData } = useMember();
 
   const { id } = useParams();
 
@@ -58,7 +60,10 @@ const AddTransaction = () => {
   const fetchTransactionFromId = async () => {
     try {
       const response = await axiosInstance(`/transactions/${id}`);
-      setTransactionData({ ...response.data, availability: true });
+      const formattedDate = response.data.transaction_date
+        ? new Date(response.data.transaction_date).toISOString().split("T")[0]
+        : "";
+      setTransactionData({ ...response.data, transaction_date: formattedDate });
     } catch (error) {
       console.log(error);
     }
@@ -68,9 +73,10 @@ const AddTransaction = () => {
     fetchTransactionFromId();
   }, [id]);
 
-  const handleTransactionDataChange = (e: any) => {
+  const handleTransactionDataChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
-
     setTransactionData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -90,7 +96,7 @@ const AddTransaction = () => {
         <h1 className="text-2xl font-bold text-center  text-indigo-700">
           {id ? "Edit Transaction" : "Add New Transaction"}
         </h1>
-        <p className="text-gray-400">
+        <p className="text-gray-400 p-2 text-center">
           Enter the details of the transaction you want to add to your
           collection.
         </p>
@@ -111,6 +117,26 @@ const AddTransaction = () => {
               {bookData.map((book) => (
                 <option key={book.id} value={book.id}>
                   {book.title}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label
+              htmlFor="member"
+              className="block text-lg font-bold text-gray-700"
+            >
+              Member
+            </label>
+            <select
+              id="member"
+              name="member_id"
+              className="w-full px-2 py-2 border-0 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100"
+              onChange={handleTransactionDataChange}
+            >
+              {memberData.map((member) => (
+                <option key={member.id} value={member.id}>
+                  {member.name}
                 </option>
               ))}
             </select>
