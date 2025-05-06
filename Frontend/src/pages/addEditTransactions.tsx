@@ -5,7 +5,16 @@ import { useNavigate, useParams } from "react-router";
 import { ArrowLeft } from "lucide-react";
 import { useBook } from "../context/booksContext";
 import Input from "../components/Input";
-import { Transaction } from "./transactions";
+
+type TRANSACTION_TYPE = "return" | "borrow";
+
+export interface Transaction {
+  id?: number;
+  book_id?: number;
+  member_id?: number;
+  transaction_date?: string;
+  type?: TRANSACTION_TYPE;
+}
 
 const AddTransaction = () => {
   const navigate = useNavigate();
@@ -72,24 +81,38 @@ const AddTransaction = () => {
       <div className="bg-white shadow-lg rounded-lg p-5 w-[500px] max-h-[90vh] ">
         <h1
           className=" font-bold text-center mb-5 flex items-center cursor-pointer text-gray-700 "
-          onClick={() => navigate("/members")}
+          onClick={() => navigate("/transactions")}
         >
           <ArrowLeft />
-          <span className="px-2">Back to members</span>
+          <span className="px-2">Back to Transactions</span>
         </h1>
         <h1 className="text-2xl font-bold text-center  text-indigo-700">
           {id ? "Edit Transaction" : "Add New Transaction"}
         </h1>
+        <p className="text-gray-400">
+          Enter the details of the transaction you want to add to your
+          collection.
+        </p>
         <form className="space-y-6" onSubmit={handleSubmit}>
-          <div>
-            <Input
-              name="name"
-              type="text"
-              id="name"
-              label="Name"
-              value={transactionData?.name || ""}
-              onChange={handleTransactionChange}
-            />
+          <div className="flex flex-col gap-2">
+            <label
+              htmlFor="book"
+              className="block text-lg font-bold text-gray-700"
+            >
+              Book
+            </label>
+            <select
+              id="book"
+              name="book_id"
+              className="w-full px-2 py-2 border-0 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100"
+              onChange={handleTransactionDataChange}
+            >
+              {bookData.map((book) => (
+                <option key={book.id} value={book.id}>
+                  {book.title}
+                </option>
+              ))}
+            </select>
           </div>
           <div>
             <Input

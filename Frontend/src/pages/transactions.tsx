@@ -3,16 +3,17 @@ import { useNavigate } from "react-router";
 import { PencilIcon, Trash2Icon } from "lucide-react";
 import Modal from "../components/Modal";
 import Button from "../components/Button";
+import { Transaction } from "./addEditTransactions";
 
-type TRANSACTION_TYPE = "return" | "borrow";
+// type TRANSACTION_TYPE = "return" | "borrow";
 
-export interface Transaction {
-  id: number;
-  book_id: number;
-  member_id: number;
-  transaction_date: string;
-  type: TRANSACTION_TYPE;
-}
+// export interface Transaction {
+//   id: number;
+//   book_id: number;
+//   member_id: number;
+//   transaction_date: string;
+//   type: TRANSACTION_TYPE;
+// }
 
 export default function Transactions() {
   const [isModalOpen, setIsModalOpen] = useState(false);
