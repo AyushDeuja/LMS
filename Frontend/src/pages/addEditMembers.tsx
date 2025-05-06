@@ -81,7 +81,7 @@ const AddEditMembers = () => {
               name="name"
               type="text"
               id="name"
-              label="name"
+              label="Name"
               value={memberData?.name || ""}
               onChange={handleMemberChange}
             />
@@ -91,7 +91,7 @@ const AddEditMembers = () => {
               name="address"
               type="text"
               id="address"
-              label="address"
+              label="Address"
               value={memberData?.address || ""}
               onChange={handleMemberChange}
             />
@@ -101,7 +101,7 @@ const AddEditMembers = () => {
               name="email"
               type="email"
               id="email"
-              label="email"
+              label="Email"
               value={memberData?.email || ""}
               onChange={handleMemberChange}
             />
@@ -109,9 +109,9 @@ const AddEditMembers = () => {
           <div>
             <Input
               name="mobile"
-              type="mobile"
+              type="tel"
               id="mobile"
-              label="mobile"
+              label="Mobile"
               value={memberData?.mobile || ""}
               onChange={handleMemberChange}
             />
