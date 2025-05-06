@@ -1,44 +1,46 @@
-import { PencilIcon, Trash2Icon } from "lucide-react";
-import Button from "../components/Button";
-import Modal from "../components/Modal";
-import { useNavigate } from "react-router";
-import { useMember } from "../context/membersContext";
 import { useState } from "react";
+import { useNavigate } from "react-router";
+import { PencilIcon, Trash2Icon } from "lucide-react";
+import Modal from "../components/Modal";
+import Button from "../components/Button";
 
-type TransactionType = "borrow" | "return";
+type TRANSACTION_TYPE = "return" | "borrow";
 
 export interface Transaction {
   id: number;
   book_id: number;
   member_id: number;
   transaction_date: string;
-  type: TransactionType;
+  type: TRANSACTION_TYPE;
 }
 
-const Transactions = () => {
-  const navigate = useNavigate();
-  const { memberData, onDelete } = useMember();
+export default function Transactions() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedMemberId, setSelectedMemberId] = useState<number | null>(null);
+  const [selectedTransactionId, setSelectedTransactionId] = useState<
+    number | null
+  >(null);
+  const [transactionData, setTransactionData] = useState<Transaction[]>([]);
+
+  const navigate = useNavigate();
 
   const handleDelete = async () => {
-    if (selectedMemberId) {
-      onDelete(selectedMemberId);
-    }
+    // if (selectedTransactionId) {
+    //   onDelete(selectedTransactionId);
+    // }
     setIsModalOpen(false);
   };
 
   const openModal = (id: number) => {
-    setSelectedMemberId(id);
+    setSelectedTransactionId(id);
     setIsModalOpen(true);
   };
   const closeModal = () => {
     setIsModalOpen(false);
-    setSelectedMemberId(null);
+    setSelectedTransactionId(null);
   };
 
-  const selectedMember = memberData.find(
-    (transaction) => transaction.id === selectedMemberId
+  const selectedTransaction = transactionData.find(
+    (transaction) => transaction.id === selectedTransactionId
   );
 
   return (
@@ -47,7 +49,7 @@ const Transactions = () => {
         <div className="flex items-center justify-between p-4">
           <h1 className="text-2xl font-bold text-center">Transactions</h1>
           <Button
-            label="Add Member"
+            label="Add Transaction"
             type="button"
             className="p-4"
             onClick={() => navigate("/add-transaction")}
@@ -65,7 +67,7 @@ const Transactions = () => {
               </tr>
             </thead>
             <tbody>
-              {memberData.map((transaction) => (
+              {transactionData.map((transaction) => (
                 <tr
                   key={transaction.id}
                   className={`bg-white hover:bg-indigo-100 transition-colors`}
@@ -77,10 +79,10 @@ const Transactions = () => {
                     {transaction.member_id}
                   </td>
                   <td className="py-3 px-6 border-b border-gray-200">
-                    {transaction.transaction_date}
+                    {transaction.type}
                   </td>
                   <td className="py-3 px-6 border-b border-gray-200">
-                    {transaction.type}
+                    {transaction.transaction_date}
                   </td>
 
                   <td>
@@ -106,13 +108,11 @@ const Transactions = () => {
           isModalOpen={isModalOpen}
           onClose={closeModal}
           onConfirm={handleDelete}
-          content={`Are you sure you want to remove the transaction "${selectedMember?.name}"? This action cannot be undone.`}
-          title={`Remove ${selectedMember?.name || "Member"}`}
+          content={`Are you sure you want to remove the transaction "${selectedTransaction?.book_id}"? This action cannot be undone.`}
+          title={`Remove ${selectedTransaction?.book_id || "Transaction"}`}
           primaryButtonLabel="Remove"
         />
       </div>
     </div>
   );
-};
-
-export default Transactions;
+}
