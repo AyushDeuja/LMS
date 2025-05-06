@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router";
 import { ArrowLeft } from "lucide-react";
 import { useBook } from "../context/booksContext";
 import Input from "../components/Input";
+import Button from "../components/Button";
 
 type TRANSACTION_TYPE = "return" | "borrow";
 
@@ -94,7 +95,7 @@ const AddTransaction = () => {
           collection.
         </p>
         <form className="space-y-6" onSubmit={handleSubmit}>
-          <div className="flex flex-col gap-2">
+          <div>
             <label
               htmlFor="book"
               className="block text-lg font-bold text-gray-700"
@@ -115,33 +116,30 @@ const AddTransaction = () => {
             </select>
           </div>
           <div>
-            <Input
-              name="address"
-              type="text"
-              id="address"
-              label="Address"
-              value={transactionData?.address || ""}
-              onChange={handleTransactionChange}
-            />
+            <label
+              htmlFor="type"
+              className="block text-lg font-bold text-gray-700"
+            >
+              Type
+            </label>
+            <select
+              id="type"
+              name="type"
+              className="w-full px-2 py-2 border-0 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100"
+              onChange={handleTransactionDataChange}
+            >
+              <option value={"borrow"}>Borrow</option>
+              <option value={"return"}>Return</option>
+            </select>
           </div>
           <div>
             <Input
-              name="email"
-              type="email"
-              id="email"
-              label="Email"
-              value={transactionData?.email || ""}
-              onChange={handleTransactionChange}
-            />
-          </div>
-          <div>
-            <Input
-              name="mobile"
-              type="tel"
-              id="mobile"
-              label="Mobile"
-              value={transactionData?.mobile || ""}
-              onChange={handleTransactionChange}
+              name="date"
+              type="date"
+              id="date"
+              label="Date"
+              value={transactionData?.transaction_date || ""}
+              onChange={handleTransactionDataChange}
             />
           </div>
 
