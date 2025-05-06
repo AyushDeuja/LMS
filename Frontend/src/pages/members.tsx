@@ -16,7 +16,6 @@ export interface Member {
 const Members = () => {
   const navigate = useNavigate();
   const { memberData, onDelete } = useMember();
-  console.log(memberData);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedMemberId, setSelectedMemberId] = useState<number | null>(null);
 

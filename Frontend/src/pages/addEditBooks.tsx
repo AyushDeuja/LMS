@@ -23,7 +23,6 @@ const AddBooks = () => {
     reader.readAsDataURL(selectedFile);
 
     reader.onload = () => {
-      console.log(reader.result);
       setBase64IMG(reader.result);
     };
   };

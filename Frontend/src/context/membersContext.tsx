@@ -28,7 +28,6 @@ const MemberProvider = ({ children }: { children: React.ReactElement }) => {
   const fetchMembers = async () => {
     try {
       const response = await axiosInstance(`/members`);
-      console.log(response.data);
       setMemberData(response.data);
     } catch (error) {
       console.log(error);
@@ -55,7 +54,6 @@ const MemberProvider = ({ children }: { children: React.ReactElement }) => {
 
   useEffect(() => {
     fetchMembers();
-    console.log("fetching");
   }, []);
 
   const value = useMemo(
