@@ -7,6 +7,7 @@ import Books from "./pages/books";
 import AddBooks from "./pages/addEditBooks";
 import Members from "./pages/members";
 import AddEditMembers from "./pages/addEditMembers";
+import Transactions from "./pages/transactions";
 
 const ProtectedRoutes = () => {
   const token = localStorage.getItem("token");
@@ -28,15 +29,18 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/" element={<ProtectedRoutes />}>
         <Route path="/" element={<Navigate to="/books" />} />
+
         <Route path="/books" element={<Books />} />
         <Route path="/add-book" element={<AddBooks />} />
         <Route path="/edit-book/:id" element={<AddBooks />} />
         <Route path="/delete-book/:id" element={<AddBooks />} />
+
         <Route path="/members" element={<Members />} />
         <Route path="/add-member" element={<AddEditMembers />} />
         <Route path="/edit-member/:id" element={<AddEditMembers />} />
         <Route path="/delete-member/:id" element={<AddEditMembers />} />
-        <Route path="/transactions" element={<div>Transaction Page</div>} />
+
+        <Route path="/transactions" element={<Transactions />} />
       </Route>
       <Route
         path="*"
