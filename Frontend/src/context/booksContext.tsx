@@ -14,7 +14,7 @@ interface Book {
 interface BookContextValues {
   bookData: Book[];
   onDelete: (id: number) => void;
-  updateBookData: (updatedBook: Book) => void;
+  updateBookData: () => void;
 }
 
 const BookContext = createContext<BookContextValues>({
@@ -35,8 +35,8 @@ const BookProvider = ({ children }: { children: React.ReactElement }) => {
     }
   };
 
-  const updateBookData = (updatedBook: Book) => {
-    setBookData([...bookData, updatedBook]);
+  const updateBookData = async () => {
+    await fetchBooks();
   };
 
   const onDelete = async (id: number) => {

@@ -30,7 +30,7 @@ const AddEditMembers = () => {
       });
 
       toast.success(`Member ${id ? "Updated" : "Added"} Successfully`);
-      await updateMemberData();
+      updateMemberData();
       navigate("/members");
     } catch (err: any) {
       setErrorMessage(
