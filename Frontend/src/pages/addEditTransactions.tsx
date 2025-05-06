@@ -4,16 +4,8 @@ import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router";
 import { ArrowLeft } from "lucide-react";
 import { useBook } from "../context/booksContext";
-
-type TRANSACTION_TYPE = "return" | "borrow";
-
-export interface Transaction {
-  id?: number;
-  book_id?: number;
-  member_id?: number;
-  transaction_date?: string;
-  type?: TRANSACTION_TYPE;
-}
+import Input from "../components/Input";
+import { Transaction } from "./transactions";
 
 const AddTransaction = () => {
   const navigate = useNavigate();
@@ -86,7 +78,7 @@ const AddTransaction = () => {
           <span className="px-2">Back to members</span>
         </h1>
         <h1 className="text-2xl font-bold text-center  text-indigo-700">
-          {id ? "Edit Member" : "Add New Member"}
+          {id ? "Edit Transaction" : "Add New Transaction"}
         </h1>
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div>
@@ -95,8 +87,8 @@ const AddTransaction = () => {
               type="text"
               id="name"
               label="Name"
-              value={memberData?.name || ""}
-              onChange={handleMemberChange}
+              value={transactionData?.name || ""}
+              onChange={handleTransactionChange}
             />
           </div>
           <div>
@@ -105,8 +97,8 @@ const AddTransaction = () => {
               type="text"
               id="address"
               label="Address"
-              value={memberData?.address || ""}
-              onChange={handleMemberChange}
+              value={transactionData?.address || ""}
+              onChange={handleTransactionChange}
             />
           </div>
           <div>
@@ -115,8 +107,8 @@ const AddTransaction = () => {
               type="email"
               id="email"
               label="Email"
-              value={memberData?.email || ""}
-              onChange={handleMemberChange}
+              value={transactionData?.email || ""}
+              onChange={handleTransactionChange}
             />
           </div>
           <div>
@@ -125,8 +117,8 @@ const AddTransaction = () => {
               type="tel"
               id="mobile"
               label="Mobile"
-              value={memberData?.mobile || ""}
-              onChange={handleMemberChange}
+              value={transactionData?.mobile || ""}
+              onChange={handleTransactionChange}
             />
           </div>
 
@@ -134,7 +126,7 @@ const AddTransaction = () => {
             <p className="text-red-500 text-lg text-center">{errorMessage}</p>
           )}
           <Button
-            label={id ? "Update Member" : "Add Member"}
+            label={id ? "Update Transaction" : "Add Transaction"}
             type="submit"
             className="w-full bg-indigo-700 hover:bg-indigo-800 text-white py-2 rounded-md"
           />
