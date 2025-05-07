@@ -33,18 +33,18 @@ export class TransactionsService {
       throw new NotFoundException('Member not found');
     }
 
-    // check if book is already borrowed
-    const existingTransaction = await this.prisma.transaction.findFirst({
-      where: {
-        book_id: createTransactionDto.book_id,
-        member_id: createTransactionDto.member_id,
-        type: ReservationType.borrow,
-      },
-    });
+    // // check if book is already borrowed
+    // const existingTransaction = await this.prisma.transaction.findFirst({
+    //   where: {
+    //     book_id: createTransactionDto.book_id,
+    //     member_id: createTransactionDto.member_id,
+    //     type: ReservationType.borrow,
+    //   },
+    // });
 
-    if (existingTransaction) {
-      throw new BadRequestException('Book is already borrowed by the member');
-    }
+    // if (existingTransaction) {
+    //   throw new BadRequestException('Book is already borrowed by the member');
+    // }
 
     return this.prisma.$transaction(async (prisma) => {
       const transaction = await prisma.transaction.create({
