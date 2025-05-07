@@ -35,7 +35,7 @@ const AddBooks = () => {
     const parsedFormValues = {
       ...formValues,
       quantity: parseInt(formValues.quantity as string, 10),
-      availability: formValues.availability === "on",
+      // availability: formValues.availability === "on",
       book_img: base64IMG || bookData?.book_img, // Use the Base64 image or existing image
     };
 
@@ -125,6 +125,7 @@ const AddBooks = () => {
               name="quantity"
               type="number"
               id="quantity"
+              required={false}
               label="Quantity"
               value={bookData?.quantity || ""}
               onChange={handleBookChange}
@@ -154,6 +155,7 @@ const AddBooks = () => {
               />
             )}
           </div>
+          {/*
           <div className="flex items-center">
             <label
               htmlFor="availability"
@@ -170,6 +172,7 @@ const AddBooks = () => {
               onChange={handleBookChange}
             />
           </div>
+          */}
           {errorMessage && (
             <p className="text-red-500 text-lg text-center">{errorMessage}</p>
           )}
