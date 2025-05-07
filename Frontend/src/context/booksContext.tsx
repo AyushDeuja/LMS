@@ -47,8 +47,8 @@ const BookProvider = ({ children }: { children: React.ReactElement }) => {
       toast.success(`Book Deleted Successfully!`);
     } catch (error: any) {
       toast.error(
-        error?.response?.data?.message ??
-          "Failed to delete book, please try again."
+        // error?.response?.data?.message ??
+        "Failed to delete book, please try again."
       );
     }
   };

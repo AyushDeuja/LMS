@@ -46,8 +46,8 @@ const MemberProvider = ({ children }: { children: React.ReactElement }) => {
       toast.success(`Member Removed Successfully!`);
     } catch (error: any) {
       toast.error(
-        error?.response?.data?.message ??
-          "Failed to remove Member, please try again."
+        // error?.response?.data?.message ??
+        "Failed to remove Member, please try again."
       );
     }
   };
