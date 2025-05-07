@@ -5,6 +5,8 @@ import Modal from "../components/Modal";
 import Button from "../components/Button";
 import { axiosInstance } from "../utils/axiosInterceptor";
 import { toast } from "react-toastify";
+import { useBook } from "../context/booksContext";
+import { useMember } from "../context/membersContext";
 
 type TRANSACTION_TYPE = "return" | "borrow";
 
@@ -22,6 +24,8 @@ export default function Transactions() {
     number | null
   >(null);
   const [transactionData, setTransactionData] = useState<Transaction[]>([]);
+  const { bookData } = useBook();
+  const { memberData } = useMember();
 
   const navigate = useNavigate();
 
@@ -69,6 +73,11 @@ export default function Transactions() {
     (transaction) => transaction.id === selectedTransactionId
   );
 
+  const renderBookTitle = (bookId: number) => {
+    const book = bookData.find((book) => book.id === bookId);
+    return book ? book.title : "Unknown Book";
+  };
+
   return (
     <div>
       <div className="h-full w-full flex flex-col">
@@ -99,7 +108,7 @@ export default function Transactions() {
                   className={`bg-white hover:bg-indigo-100 transition-colors`}
                 >
                   <td className="py-3 px-6 border-b border-gray-200 font-bold text-lg">
-                    {transaction.book_id}
+                    {renderBookTitle(transaction.book_id)}
                   </td>
                   <td className="py-3 px-6 border-b border-gray-200 font-semibold">
                     {transaction.member_id}
