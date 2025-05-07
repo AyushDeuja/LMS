@@ -60,10 +60,7 @@ const AddTransaction = () => {
   const fetchTransactionFromId = async () => {
     try {
       const response = await axiosInstance(`/transactions/${id}`);
-      const formattedDate = response.data.transaction_date
-        ? new Date(response.data.transaction_date).toISOString().split("T")[0]
-        : "";
-      setTransactionData({ ...response.data, transaction_date: formattedDate });
+      setTransactionData({ ...response.data, availability: true });
     } catch (error) {
       console.log(error);
     }
@@ -164,7 +161,13 @@ const AddTransaction = () => {
               type="date"
               id="date"
               label="Date"
-              value={transactionData?.transaction_date || ""}
+              value={
+                transactionData?.transaction_date
+                  ? new Date(
+                      transactionData?.transaction_date
+                    ).toLocaleDateString("en-US")
+                  : ""
+              }
               onChange={handleTransactionDataChange}
             />
           </div>
