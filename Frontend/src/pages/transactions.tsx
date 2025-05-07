@@ -69,10 +69,6 @@ export default function Transactions() {
     setSelectedTransactionId(null);
   };
 
-  const selectedTransaction = transactionData.find(
-    (transaction) => transaction.id === selectedTransactionId
-  );
-
   const renderBookTitle = (book_id: number) => {
     const book = bookData.find((book) => book.id === book_id);
     return book ? book.title : "Unknown Book";
@@ -128,12 +124,6 @@ export default function Transactions() {
 
                   <td>
                     <div className="flex items-center justify-center gap-4">
-                      {/* <PencilIcon
-                        className="text-blue-400 cursor-pointer"
-                        onClick={() =>
-                          navigate(`/edit-transaction/${transaction.id}`)
-                        }
-                      /> */}
                       <Trash2Icon
                         className="text-red-400 cursor-pointer"
                         onClick={() => openModal(transaction.id as number)}
