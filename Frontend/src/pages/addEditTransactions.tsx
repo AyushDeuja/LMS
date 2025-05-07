@@ -22,7 +22,7 @@ const AddTransaction = () => {
   const navigate = useNavigate();
   const [transactionData, setTransactionData] = useState<Transaction>();
   const [errorMessage, setErrorMessage] = useState("");
-  const { bookData } = useBook();
+  const { bookData, updateBookData } = useBook();
   const { memberData } = useMember();
 
   const { id } = useParams();
@@ -46,6 +46,8 @@ const AddTransaction = () => {
           transaction_date: new Date(parsedFormValues.transaction_date),
         },
       });
+
+      updateBookData();
 
       toast.success("Transaction Added Successfully");
       navigate("/transactions");

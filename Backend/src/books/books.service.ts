@@ -17,20 +17,30 @@ export class BooksService {
         createBookDto.book_img,
       );
     }
-    if (!createBookDto.quantity) {
-      createBookDto.quantity = 0;
-    }
-    if (createBookDto.quantity < 0) {
-      throw new Error('Quantity cannot be negative');
-    }
-    if (createBookDto.availability === undefined) {
-      createBookDto.availability = false;
-    }
 
-    if (createBookDto.quantity === 0) {
-      createBookDto.availability = false;
-    } else if (createBookDto.quantity > 0) {
-      createBookDto.availability = true;
+    // //check if quantity is less than 0
+    // if (createBookDto.quantity < 0) {
+    //   throw new NotFoundException('Quantity cannot be less than 0');
+    // }
+    // if (createBookDto.quantity === 0) {
+    //   createBookDto.availability = false;
+    // } else if (createBookDto.quantity > 0) {
+    //   createBookDto.availability = true;
+    // }
+
+    //check if book and author already exists
+    const existingBookTitle = await this.prisma.book.findFirst({
+      where: {
+        title: createBookDto.title,
+      },
+    });
+    const existingAuthor = await this.prisma.book.findFirst({
+      where: {
+        author: createBookDto.author,
+      },
+    });
+    if (existingBookTitle && existingAuthor) {
+      throw new NotFoundException('Book and Author already exists');
     }
 
     return this.prisma.book.create({
@@ -58,23 +68,6 @@ export class BooksService {
 
   async update(id: number, updateBookDto: UpdateBookDto) {
     await this.findOne(id, updateBookDto.user_id as number);
-
-    if (!updateBookDto.quantity) {
-      updateBookDto.quantity = 0;
-    }
-    if (updateBookDto.quantity < 0) {
-      throw new Error('Quantity cannot be negative');
-    }
-    if (updateBookDto.availability === undefined) {
-      updateBookDto.availability = false;
-    }
-
-    if (updateBookDto.quantity === 0) {
-      updateBookDto.availability = false;
-    } else if (updateBookDto.quantity > 0) {
-      updateBookDto.availability = true;
-    }
-
     return this.prisma.book.update({
       where: { id },
       data: updateBookDto,
