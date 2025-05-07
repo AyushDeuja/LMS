@@ -73,9 +73,13 @@ export default function Transactions() {
     (transaction) => transaction.id === selectedTransactionId
   );
 
-  const renderBookTitle = (bookId: number) => {
-    const book = bookData.find((book) => book.id === bookId);
+  const renderBookTitle = (book_id: number) => {
+    const book = bookData.find((book) => book.id === book_id);
     return book ? book.title : "Unknown Book";
+  };
+  const renderMemberName = (member_id: number) => {
+    const member = memberData.find((member) => member.id === member_id);
+    return member ? member.name : "Unknown Member";
   };
 
   return (
@@ -111,7 +115,7 @@ export default function Transactions() {
                     {renderBookTitle(transaction.book_id)}
                   </td>
                   <td className="py-3 px-6 border-b border-gray-200 font-semibold">
-                    {transaction.member_id}
+                    {renderMemberName(transaction.member_id)}
                   </td>
                   <td className="py-3 px-6 border-b border-gray-200">
                     {transaction.type}
