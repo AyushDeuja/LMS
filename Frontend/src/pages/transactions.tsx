@@ -4,6 +4,7 @@ import { PencilIcon, Trash2Icon } from "lucide-react";
 import Modal from "../components/Modal";
 import Button from "../components/Button";
 import { axiosInstance } from "../utils/axiosInterceptor";
+import { toast } from "react-toastify";
 
 type TRANSACTION_TYPE = "return" | "borrow";
 
@@ -39,9 +40,19 @@ export default function Transactions() {
   }, []);
 
   const handleDelete = async () => {
-    // if (selectedTransactionId) {
-    //   onDelete(selectedTransactionId);
-    // }
+    if (selectedTransactionId) {
+      try {
+        await axiosInstance(`/transactions/${selectedTransactionId}`, {
+          method: "DELETE",
+        });
+        setTransactionData((prev) =>
+          prev.filter((transaction) => transaction.id !== selectedTransactionId)
+        );
+        toast.success("Transaction deleted successfully");
+      } catch (error) {
+        toast.error("Failed to delete transaction");
+      }
+    }
     setIsModalOpen(false);
   };
 
@@ -104,12 +115,12 @@ export default function Transactions() {
 
                   <td>
                     <div className="flex items-center justify-center gap-4">
-                      <PencilIcon
+                      {/* <PencilIcon
                         className="text-blue-400 cursor-pointer"
                         onClick={() =>
                           navigate(`/edit-transaction/${transaction.id}`)
                         }
-                      />
+                      /> */}
                       <Trash2Icon
                         className="text-red-400 cursor-pointer"
                         onClick={() => openModal(transaction.id as number)}
