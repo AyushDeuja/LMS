@@ -69,7 +69,7 @@ export default function Transactions() {
                 <th className="py-3 px-6 text-left">Member</th>
                 <th className="py-3 px-6 text-left">Type</th>
                 <th className="py-3 px-6 text-left">Date</th>
-                <th className="py-3 px-6 text-left">Actions</th>
+                <th className="py-3 px-6 text-center">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -115,7 +115,9 @@ export default function Transactions() {
           onClose={closeModal}
           onConfirm={handleDelete}
           content={`Are you sure you want to remove the transaction "${selectedTransaction?.book_id}"? This action cannot be undone.`}
-          title={`Remove ${selectedTransaction?.book_id || "Transaction"}`}
+          title={`Remove book: ${
+            selectedTransaction?.book_id || "Transaction"
+          }`}
           primaryButtonLabel="Remove"
         />
       </div>

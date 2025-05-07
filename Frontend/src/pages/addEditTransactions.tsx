@@ -163,9 +163,9 @@ const AddTransaction = () => {
               label="Date"
               value={
                 transactionData?.transaction_date
-                  ? new Date(
-                      transactionData?.transaction_date
-                    ).toLocaleDateString("en-US")
+                  ? new Date(transactionData?.transaction_date).toLocaleString(
+                      "en-US"
+                    )
                   : ""
               }
               onChange={handleTransactionDataChange}
