@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { PencilIcon, Trash2Icon } from "lucide-react";
+import { Trash2Icon } from "lucide-react";
 import Modal from "../components/Modal";
 import Button from "../components/Button";
 import { axiosInstance } from "../utils/axiosInterceptor";
@@ -149,10 +149,8 @@ export default function Transactions() {
           isModalOpen={isModalOpen}
           onClose={closeModal}
           onConfirm={handleDelete}
-          content={`Are you sure you want to remove the transaction "${selectedTransaction?.book_id}"? This action cannot be undone.`}
-          title={`Remove book: ${
-            selectedTransaction?.book_id || "Transaction"
-          }`}
+          content={`Are you sure you want to remove this transaction? This action cannot be undone.`}
+          title={`Remove Transaction`}
           primaryButtonLabel="Remove"
         />
       </div>
