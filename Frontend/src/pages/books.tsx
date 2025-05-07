@@ -58,7 +58,7 @@ const Books = () => {
               <th className="py-3 px-6 text-left">Quantity</th>
               <th className="py-3 px-6 text-left">Book Image</th>
               <th className="py-3 px-6 text-left">Availability</th>
-              <th className="py-3 px-6 text-left">Actions</th>
+              <th className="py-3 px-6 text-center">Actions</th>
             </tr>
           </thead>
           <tbody>
