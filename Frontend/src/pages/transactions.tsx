@@ -1,4 +1,4 @@
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { PencilIcon, Trash2Icon } from "lucide-react";
 import Modal from "../components/Modal";
