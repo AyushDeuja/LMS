@@ -43,11 +43,11 @@ const AddTransaction = () => {
           ...parsedFormValues,
           book_id: parseInt(parsedFormValues.book_id, 10),
           member_id: parseInt(parsedFormValues.member_id, 10),
+          transaction_date: new Date(parsedFormValues.transaction_date),
         },
       });
 
       toast.success("Transaction Added Successfully");
-      // updateTransaction(parsedFormValues);
       navigate("/transactions");
     } catch (err: any) {
       setErrorMessage(
@@ -60,14 +60,19 @@ const AddTransaction = () => {
   const fetchTransactionFromId = async () => {
     try {
       const response = await axiosInstance(`/transactions/${id}`);
-      setTransactionData({ ...response.data, availability: true });
+      const formattedDate = response.data.transaction_date
+        ? new Date(response.data.transaction_date).toLocaleDateString()
+        : "";
+      setTransactionData({ ...response.data, transaction_date: formattedDate });
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    fetchTransactionFromId();
+    if (id) {
+      fetchTransactionFromId();
+    }
   }, [id]);
 
   const handleTransactionDataChange = (
@@ -110,7 +115,11 @@ const AddTransaction = () => {
               name="book_id"
               className="w-full px-2 py-2 border-0 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100"
               onChange={handleTransactionDataChange}
+              value={transactionData?.book_id || ""}
             >
+              <option value="" disabled>
+                Select a Book
+              </option>
               {bookData.map((book) => (
                 <option key={book.id} value={book.id}>
                   {book.title}
@@ -130,7 +139,11 @@ const AddTransaction = () => {
               name="member_id"
               className="w-full px-2 py-2 border-0 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100"
               onChange={handleTransactionDataChange}
+              value={transactionData?.member_id || ""}
             >
+              <option value="" disabled>
+                Select a Member
+              </option>
               {memberData.map((member) => (
                 <option key={member.id} value={member.id}>
                   {member.name}
@@ -150,24 +163,22 @@ const AddTransaction = () => {
               name="type"
               className="w-full px-2 py-2 border-0 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-100"
               onChange={handleTransactionDataChange}
+              value={transactionData?.type || ""}
             >
-              <option value={"borrow"}>Borrow</option>
-              <option value={"return"}>Return</option>
+              <option value="" disabled>
+                Select Type
+              </option>
+              <option value="borrow">Borrow</option>
+              <option value="return">Return</option>
             </select>
           </div>
           <div>
             <Input
-              name="date"
+              name="transaction_date"
               type="date"
               id="date"
               label="Date"
-              value={
-                transactionData?.transaction_date
-                  ? new Date(transactionData?.transaction_date).toLocaleString(
-                      "en-US"
-                    )
-                  : ""
-              }
+              value={transactionData?.transaction_date || ""}
               onChange={handleTransactionDataChange}
             />
           </div>

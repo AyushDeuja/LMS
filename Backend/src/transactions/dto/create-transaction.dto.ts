@@ -15,6 +15,9 @@ export class CreateTransactionDto {
   member_id: number;
 
   @IsOptional()
+  transaction_date: Date;
+
+  @IsOptional()
   @IsEnum(ReservationType)
   type: ReservationType;
 }
