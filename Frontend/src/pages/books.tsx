@@ -88,7 +88,7 @@ const Books = () => {
                   )}
                 </td>
                 <td className="py-3 px-6 border-b border-gray-200 font-semibold">
-                  {book.availability ? (
+                  {book.availability === true ? (
                     <p className="text-green-600">Available</p>
                   ) : (
                     <p className="text-red-600">Not Available</p>

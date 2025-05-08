@@ -125,6 +125,7 @@ const AddBooks = () => {
               name="quantity"
               type="number"
               id="quantity"
+              required={false}
               label="Quantity"
               value={bookData?.quantity || ""}
               onChange={handleBookChange}
@@ -154,7 +155,7 @@ const AddBooks = () => {
               />
             )}
           </div>
-          <div className="flex items-center">
+          {/* <div className="flex items-center">
             <label
               htmlFor="availability"
               className="text-gray-700 text-sm font-bold"
@@ -169,7 +170,7 @@ const AddBooks = () => {
               checked={bookData?.availability || false}
               onChange={handleBookChange}
             />
-          </div>
+          </div> */}
           {errorMessage && (
             <p className="text-red-500 text-lg text-center">{errorMessage}</p>
           )}

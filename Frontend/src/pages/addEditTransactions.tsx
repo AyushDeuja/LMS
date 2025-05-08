@@ -20,7 +20,9 @@ export interface Transaction {
 
 const AddTransaction = () => {
   const navigate = useNavigate();
-  const [transactionData, setTransactionData] = useState<Transaction>();
+  const [transactionData, setTransactionData] = useState<Transaction>({
+    transaction_date: new Date().toISOString().split("T")[0], // Set default to current date
+  });
   const [errorMessage, setErrorMessage] = useState("");
   const { bookData, updateBookData } = useBook();
   const { memberData } = useMember();
@@ -33,8 +35,6 @@ const AddTransaction = () => {
     const formValues = JSON.stringify(Object.fromEntries(formData.entries()));
     const parsedFormValues = JSON.parse(formValues);
     const url = id ? `/transactions/${id}` : "/transactions";
-
-    console.log(parsedFormValues);
 
     try {
       await axiosInstance(url, {
@@ -63,8 +63,8 @@ const AddTransaction = () => {
     try {
       const response = await axiosInstance(`/transactions/${id}`);
       const formattedDate = response.data.transaction_date
-        ? new Date(response.data.transaction_date).toLocaleDateString()
-        : "";
+        ? new Date(response.data.transaction_date).toISOString().split("T")[0]
+        : new Date().toISOString().split("T")[0]; // Default to current date if not available
       setTransactionData({ ...response.data, transaction_date: formattedDate });
     } catch (error) {
       console.log(error);
