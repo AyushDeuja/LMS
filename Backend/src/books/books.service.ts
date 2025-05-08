@@ -23,7 +23,11 @@ export class BooksService {
     if (createBookDto.quantity < 0) {
       throw new NotFoundException('Quantity cannot be less than 0');
     }
-    if (createBookDto.quantity === 0 || createBookDto.quantity === null) {
+    if (
+      createBookDto.quantity === 0 ||
+      createBookDto.quantity === null ||
+      createBookDto.quantity === undefined
+    ) {
       createBookDto.quantity = 0;
       createBookDto.availability = false;
     } else if (createBookDto.quantity > 0) {

@@ -7,13 +7,13 @@ import { useNavigate, useParams } from "react-router";
 import { Book } from "./books";
 import { Image, ArrowLeft } from "lucide-react";
 import { useBook } from "../context/booksContext";
-import { boolean, number, object, string } from "yup";
+import { number, object, string } from "yup";
 
 const bookSchema = object({
   title: string().required(),
   author: string().required(),
-  quantity: number(),
-  availability: boolean().required(),
+  quantity: number().nullable(),
+  // availability: boolean(),
 });
 
 const AddBooks = () => {
@@ -22,6 +22,8 @@ const AddBooks = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [base64IMG, setBase64IMG] = useState<string | ArrayBuffer | null>(null);
   const { updateBookData } = useBook();
+
+  console.log(bookData, "bookData");
 
   const { id } = useParams();
 
@@ -37,30 +39,35 @@ const AddBooks = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
+    // const formData = new FormData(e.currentTarget);
 
-    const formValues = Object.fromEntries(formData.entries());
-    const parsedFormValues = {
-      ...formValues,
-      quantity: parseInt(formValues.quantity as string, 10),
-      availability: formValues.availability === "on",
-      book_img: base64IMG || bookData?.book_img, // Use the Base64 image or existing image
-    };
+    // const formValues = Object.fromEntries(formData.entries());
+    // const parsedFormValues = {
+    //   ...formValues,
+    //   quantity: parseInt(formValues.quantity as string, 10),
+    //   availability: formValues.availability === "on",
+    //   book_img: base64IMG || bookData?.book_img, // Use the Base64 image or existing image
+    // };
 
     const url = id ? `/books/${id}` : "/books";
-
+    console.log(bookData, "bookData");
     try {
-      // const values = await bookSchema.validate(formValues);
-      // console.log(values);
+      const values = await bookSchema.validate(bookData);
+      console.log(values);
       await axiosInstance(url, {
         method: id ? "PATCH" : "POST",
-        data: parsedFormValues,
+        data: {
+          ...values,
+          availability: (values.quantity as number) > 0 ? true : false,
+          book_img: base64IMG || bookData?.book_img, // Use the Base64 image or existing image
+        },
       });
 
       toast.success(`Book ${id ? "Updated" : "Added"} Successfully`);
       updateBookData(); // Update the book data in context
       navigate("/books");
     } catch (err: any) {
+      console.log(err);
       setErrorMessage(
         err.response?.data?.message || "Failed, Please try again"
       );
@@ -85,13 +92,18 @@ const AddBooks = () => {
 
   const handleBookChange = (e: any) => {
     const { name, value, checked, type, files } = e.target;
+    console.log({ name, value, type });
+    let formValue = value;
+    if (type === "number" && value === "") {
+      formValue = 0; // Set to 0 if the input is empty and type is number
+    }
 
     if (name === "book_img" && files && files[0]) {
       convertToBase64(files[0]); // Convert the selected file to Base64
     } else {
       setBookData((prevData) => ({
         ...prevData,
-        [name]: type === "checkbox" ? checked : value,
+        [name]: type === "checkbox" ? checked : formValue,
       }));
     }
   };
@@ -137,7 +149,7 @@ const AddBooks = () => {
               id="quantity"
               required={false}
               label="Quantity"
-              value={bookData?.quantity || ""}
+              value={bookData?.quantity ? bookData.quantity : 0}
               onChange={handleBookChange}
             />
           </div>
