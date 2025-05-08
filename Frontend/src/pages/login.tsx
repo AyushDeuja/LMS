@@ -8,6 +8,7 @@ import { object, string } from "yup";
 
 let loginSchema = object({
   username: string().required("Username is required"),
+  password: string().required("Password is required"),
 });
 
 const Login = () => {
