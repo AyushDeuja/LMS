@@ -4,6 +4,14 @@ import Input from "../components/Input";
 import { FormEvent, useState } from "react";
 import { toast } from "react-toastify";
 import { axiosInstance } from "../utils/axiosInterceptor";
+import { object, string } from "yup";
+
+let registerSchema = object({
+  name: string().required(),
+  email: string().required(),
+  mobile: string().required(),
+  password: string().required("Password is required"),
+});
 
 const Register = () => {
   const navigate = useNavigate();
@@ -15,9 +23,11 @@ const Register = () => {
 
     //fetching api
     try {
+      const values = await registerSchema.validate(formValues);
+      console.log(values);
       const response = await axiosInstance(`/auth/register`, {
         method: "POST",
-        data: formValues,
+        data: values,
       });
       localStorage.setItem("token", response.data.token);
       navigate("/");

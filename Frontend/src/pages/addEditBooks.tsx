@@ -7,6 +7,14 @@ import { useNavigate, useParams } from "react-router";
 import { Book } from "./books";
 import { Image, ArrowLeft } from "lucide-react";
 import { useBook } from "../context/booksContext";
+import { boolean, number, object, string } from "yup";
+
+const bookSchema = object({
+  title: string().required(),
+  author: string().required(),
+  quantity: number(),
+  availability: boolean().required(),
+});
 
 const AddBooks = () => {
   const navigate = useNavigate();
@@ -42,6 +50,8 @@ const AddBooks = () => {
     const url = id ? `/books/${id}` : "/books";
 
     try {
+      // const values = await bookSchema.validate(formValues);
+      // console.log(values);
       await axiosInstance(url, {
         method: id ? "PATCH" : "POST",
         data: parsedFormValues,
