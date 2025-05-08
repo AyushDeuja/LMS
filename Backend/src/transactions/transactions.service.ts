@@ -36,35 +36,33 @@ export class TransactionsService {
       throw new NotFoundException('Member not found');
     }
 
-    /*
-    // only allow return if the book is borrowed by the member
-    if (
-      createTransactionDto.type === ReservationType.return &&
-      !(await this.prisma.transaction.findFirst({
-        where: {
-          book_id: createTransactionDto.book_id,
-          member_id: createTransactionDto.member_id,
-          type: ReservationType.borrow,
-        },
-      }))
-    ) {
-      throw new BadRequestException(
-        'Book is not borrowed by the member, cannot return',
-      );
-    }
+    // //check if book is already borrowed by same person
+    // const existingTransaction = await this.prisma.transaction.findFirst({
+    //   where: {
+    //     book_id: createTransactionDto.book_id,
+    //     member_id: createTransactionDto.member_id,
+    //     type: ReservationType.borrow,
+    //   },
+    // });
+    // if (existingTransaction) {
+    //   throw new BadRequestException('Book is already borrowed by the member');
+    // }
 
-    //check if book is already borrowed by same person
-    const existingTransaction = await this.prisma.transaction.findFirst({
-      where: {
-        book_id: createTransactionDto.book_id,
-        member_id: createTransactionDto.member_id,
-        type: ReservationType.borrow,
-      },
-    });
-    if (existingTransaction) {
-      throw new BadRequestException('Book is already borrowed by the member');
-    }
-    */
+    //allow only borrow once and return only after borrowing and must be same person
+    // const existingTransaction = await this.prisma.transaction.findFirst({
+    //   where: {
+    //     book_id: createTransactionDto.book_id,
+    //     member_id: createTransactionDto.member_id,
+    //     type: createTransactionDto.type,
+    //   },
+    // });
+    // if (existingTransaction) {
+    //   if (createTransactionDto.type === ReservationType.borrow) {
+    //     throw new BadRequestException('Book is already borrowed by the member');
+    //   } else if (createTransactionDto.type === ReservationType.return) {
+    //     throw new BadRequestException('Book is already returned by the member');
+    //   }
+    // }
 
     return this.prisma.$transaction(async (prisma) => {
       const transaction = await prisma.transaction.create({
