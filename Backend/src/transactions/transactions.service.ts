@@ -11,81 +11,69 @@ export class TransactionsService {
   constructor(private readonly prisma: PrismaClient) {}
 
   async create(createTransactionDto: CreateTransactionDto) {
-    // check if book exists
+    const { book_id, member_id, type } = createTransactionDto;
+
+    // Check if book exists
     const book = await this.prisma.book.findUnique({
-      where: { id: createTransactionDto.book_id },
+      where: { id: book_id },
     });
+    if (!book) throw new NotFoundException('Book not found');
 
-    if (!book) {
-      throw new NotFoundException('Book not found');
-    }
-
-    if (
-      createTransactionDto.type === ReservationType.borrow &&
-      (book.quantity as number) <= 0
-    ) {
-      throw new BadRequestException('Book is not available');
-    }
-
-    // check if member exists
+    // Check if member exists
     const member = await this.prisma.member.findUnique({
-      where: { id: createTransactionDto.member_id },
+      where: { id: member_id },
     });
+    if (!member) throw new NotFoundException('Member not found');
 
-    if (!member) {
-      throw new NotFoundException('Member not found');
+    // Count borrows and returns to track active borrow status
+    const [borrowCount, returnCount] = await Promise.all([
+      this.prisma.transaction.count({
+        where: {
+          book_id,
+          member_id,
+          type: ReservationType.borrow,
+        },
+      }),
+      this.prisma.transaction.count({
+        where: {
+          book_id,
+          member_id,
+          type: ReservationType.return,
+        },
+      }),
+    ]);
+
+    if (type === ReservationType.borrow) {
+      if ((book.quantity as number) <= 0) {
+        throw new BadRequestException('Book is not available');
+      }
+
+      if (borrowCount > returnCount) {
+        throw new BadRequestException('Book already borrowed by the member');
+      }
+    } else if (type === ReservationType.return) {
+      if (borrowCount <= returnCount) {
+        throw new BadRequestException('Book not borrowed or already returned');
+      }
     }
 
-    // //check if book is already borrowed by same person
-    // const existingTransaction = await this.prisma.transaction.findFirst({
-    //   where: {
-    //     book_id: createTransactionDto.book_id,
-    //     member_id: createTransactionDto.member_id,
-    //     type: ReservationType.borrow,
-    //   },
-    // });
-    // if (existingTransaction) {
-    //   throw new BadRequestException('Book is already borrowed by the member');
-    // }
-
-    //allow only borrow once and return only after borrowing and must be same person
-    // const existingTransaction = await this.prisma.transaction.findFirst({
-    //   where: {
-    //     book_id: createTransactionDto.book_id,
-    //     member_id: createTransactionDto.member_id,
-    //     type: createTransactionDto.type,
-    //   },
-    // });
-    // if (existingTransaction) {
-    //   if (createTransactionDto.type === ReservationType.borrow) {
-    //     throw new BadRequestException('Book is already borrowed by the member');
-    //   } else if (createTransactionDto.type === ReservationType.return) {
-    //     throw new BadRequestException('Book is already returned by the member');
-    //   }
-    // }
-
+    // Perform transaction
     return this.prisma.$transaction(async (prisma) => {
       const transaction = await prisma.transaction.create({
         data: createTransactionDto,
       });
 
-      // Calculate the new quantity
-      const updatedQuantity =
-        createTransactionDto.type === ReservationType.borrow
-          ? (book.quantity as number) - 1
-          : (book.quantity as number) + 1;
-
       await prisma.book.update({
-        where: { id: createTransactionDto.book_id },
+        where: { id: book_id },
         data: {
           quantity: {
-            ...(createTransactionDto.type === ReservationType.borrow
+            ...(type === ReservationType.borrow
               ? { decrement: 1 }
               : { increment: 1 }),
           },
           availability:
-            createTransactionDto.type === ReservationType.borrow
-              ? updatedQuantity > 0
+            type === ReservationType.borrow
+              ? (book.quantity as number) - 1 > 0
               : true,
         },
       });
