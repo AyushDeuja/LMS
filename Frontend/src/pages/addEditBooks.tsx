@@ -53,7 +53,6 @@ const AddBooks = () => {
     console.log(bookData, "bookData");
     try {
       const values = await bookSchema.validate(bookData);
-      console.log(values);
       await axiosInstance(url, {
         method: id ? "PATCH" : "POST",
         data: {
@@ -67,7 +66,6 @@ const AddBooks = () => {
       updateBookData(); // Update the book data in context
       navigate("/books");
     } catch (err: any) {
-      console.log(err);
       setErrorMessage(
         err.response?.data?.message || "Failed, Please try again"
       );
@@ -92,7 +90,6 @@ const AddBooks = () => {
 
   const handleBookChange = (e: any) => {
     const { name, value, checked, type, files } = e.target;
-    console.log({ name, value, type });
     let formValue = value;
     if (type === "number" && value === "") {
       formValue = 0; // Set to 0 if the input is empty and type is number

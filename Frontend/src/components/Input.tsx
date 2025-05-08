@@ -15,7 +15,6 @@ const Input = ({
   id,
   name,
   required = true,
-
   ...rest
 }: InputProps) => {
   const [showPassword, setShowPassword] = useState(false);
