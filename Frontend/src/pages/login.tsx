@@ -4,6 +4,11 @@ import Input from "../components/Input";
 import { FormEvent, useState } from "react";
 import { toast } from "react-toastify";
 import { axiosInstance } from "../utils/axiosInterceptor";
+import { object, string } from "yup";
+
+let loginSchema = object({
+  username: string().required("Username is required"),
+});
 
 const Login = () => {
   const navigate = useNavigate();
