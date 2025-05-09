@@ -5,6 +5,7 @@ import { FormEvent, useState } from "react";
 import { toast } from "react-toastify";
 import { axiosInstance } from "../utils/axiosInterceptor";
 import { object, string } from "yup";
+import { useBook } from "../context/booksContext";
 
 let loginSchema = object({
   username: string().required("Username is required"),
@@ -14,7 +15,7 @@ let loginSchema = object({
 const Login = () => {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
-
+  const { updateBookData } = useBook();
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -29,6 +30,7 @@ const Login = () => {
         data: values,
       });
       localStorage.setItem("token", response.data.token);
+      updateBookData();
       navigate("/");
       toast.success("Welcome");
     } catch (errorMessage: any) {
