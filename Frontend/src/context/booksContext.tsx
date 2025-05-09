@@ -7,7 +7,7 @@ interface Book {
   author?: string;
   id?: number;
   quantity?: number;
-  // availability?: boolean;
+  availability?: boolean;
   book_img?: string;
 }
 

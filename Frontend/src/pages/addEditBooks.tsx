@@ -39,6 +39,7 @@ const AddBooks = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     // const formData = new FormData(e.currentTarget);
 
     // const formValues = Object.fromEntries(formData.entries());
@@ -50,13 +51,14 @@ const AddBooks = () => {
     // };
 
     const url = id ? `/books/${id}` : "/books";
-    console.log(bookData, "bookData");
     try {
       const values = await bookSchema.validate(bookData);
+      // const quantity = values.quantity ?? 0;
       await axiosInstance(url, {
         method: id ? "PATCH" : "POST",
         data: {
           ...values,
+          quantity: values.quantity ?? 0,
           availability: (values.quantity as number) > 0 ? true : false,
           book_img: base64IMG || bookData?.book_img, // Use the Base64 image or existing image
         },
@@ -91,8 +93,8 @@ const AddBooks = () => {
   const handleBookChange = (e: any) => {
     const { name, value, checked, type, files } = e.target;
     let formValue = value;
-    if (type === "number" && value === "") {
-      formValue = 0; // Set to 0 if the input is empty and type is number
+    if (name === "quantity" && (value === "" || value === undefined)) {
+      formValue = 0;
     }
 
     if (name === "book_img" && files && files[0]) {
@@ -146,7 +148,7 @@ const AddBooks = () => {
               id="quantity"
               required={false}
               label="Quantity"
-              value={bookData?.quantity ? bookData.quantity : 0}
+              value={bookData?.quantity || 0}
               onChange={handleBookChange}
             />
           </div>
