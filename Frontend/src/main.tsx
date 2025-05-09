@@ -8,6 +8,7 @@ import { ThemeProvider } from "./context/themeContext.tsx";
 import { BookProvider } from "./context/booksContext";
 import { MemberProvider } from "./context/membersContext.tsx";
 import { Provider } from "react-redux";
+import { store } from "./redux/store.ts";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -15,7 +16,7 @@ createRoot(document.getElementById("root")!).render(
       <ThemeProvider>
         <BookProvider>
           <MemberProvider>
-            <Provider>
+            <Provider store={store}>
               <App />
             </Provider>
           </MemberProvider>

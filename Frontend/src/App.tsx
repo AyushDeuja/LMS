@@ -9,6 +9,7 @@ import Members from "./pages/members";
 import AddEditMembers from "./pages/addEditMembers";
 import Transactions from "./pages/transactions";
 import AddEditTransactions from "./pages/addEditTransactions";
+import BooksWithRedux from "./pages/booksWithRedux";
 
 const ProtectedRoutes = () => {
   const token = localStorage.getItem("token");
@@ -31,7 +32,8 @@ function App() {
       <Route path="/" element={<ProtectedRoutes />}>
         <Route path="/" element={<Navigate to="/books" />} />
 
-        <Route path="/books" element={<Books />} />
+        <Route path="/books" element={<BooksWithRedux />} />
+        {/* <Route path="/books" element={<Books />} /> */}
         <Route path="/add-book" element={<AddBooks />} />
         <Route path="/edit-book/:id" element={<AddBooks />} />
         <Route path="/delete-book/:id" element={<AddBooks />} />
