@@ -18,7 +18,11 @@ createRoot(document.getElementById("root")!).render(
           </MemberProvider>
         </BookProvider>
       </ThemeProvider>
-      <ToastContainer autoClose={500} pauseOnHover={true} />
+      <ToastContainer
+        autoClose={500}
+        pauseOnHover={true}
+        position="top-right"
+      />
     </BrowserRouter>
   </StrictMode>
 );
