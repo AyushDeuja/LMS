@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { axiosInstance } from "../utils/axiosInterceptor";
 import { object, string } from "yup";
 import { useBook } from "../context/booksContext";
+import { useMember } from "../context/membersContext";
 
 let loginSchema = object({
   username: string().required("Username is required"),
@@ -15,6 +16,7 @@ let loginSchema = object({
 const Login = () => {
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
+  const { updateMemberData } = useMember();
   const { updateBookData } = useBook();
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -31,6 +33,7 @@ const Login = () => {
       });
       localStorage.setItem("token", response.data.token);
       updateBookData();
+      updateMemberData();
       navigate("/");
       toast.success("Welcome");
     } catch (errorMessage: any) {
