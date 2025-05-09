@@ -7,6 +7,7 @@ import { ToastContainer } from "react-toastify";
 import { ThemeProvider } from "./context/themeContext.tsx";
 import { BookProvider } from "./context/booksContext";
 import { MemberProvider } from "./context/membersContext.tsx";
+import { Provider } from "react-redux";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -14,7 +15,9 @@ createRoot(document.getElementById("root")!).render(
       <ThemeProvider>
         <BookProvider>
           <MemberProvider>
-            <App />
+            <Provider>
+              <App />
+            </Provider>
           </MemberProvider>
         </BookProvider>
       </ThemeProvider>

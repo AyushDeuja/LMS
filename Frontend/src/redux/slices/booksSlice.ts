@@ -27,6 +27,7 @@ export const booksSlice = createSlice({
   reducers: {
     addBook: (state) => {
       state.data = [
+        ...state.data,
         {
           id: 1,
           title: "New Book",
@@ -38,3 +39,6 @@ export const booksSlice = createSlice({
     },
   },
 });
+
+export const { addBook } = booksSlice.actions;
+export default booksSlice.reducer;
