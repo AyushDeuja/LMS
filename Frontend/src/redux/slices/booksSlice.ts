@@ -31,6 +31,8 @@ export const booksSlice = createSlice({
           id: 1,
           title: "New Book",
           author: "Author",
+          availability: true,
+          quantity: 100,
         },
       ];
     },
