@@ -41,6 +41,13 @@ const Books = () => {
   };
   const selectedBook = bookData.find((book) => book.id === selectedBookId);
 
+  const handleSearch = () => {
+    const filtered = bookData.filter((book) => {
+      book.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        book.author?.toLowerCase().includes(searchTerm.toLowerCase());
+    });
+  };
+
   return (
     <div className="h-full w-full flex flex-col">
       <div className="flex items-center justify-between p-4">
