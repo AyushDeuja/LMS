@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import { PencilIcon, Trash2Icon } from "lucide-react";
 import Modal from "../components/Modal";
 import { useBook } from "../context/booksContext";
+import Input from "../components/Input";
 
 export interface Book {
   title?: string;
@@ -42,6 +43,23 @@ const Books = () => {
     <div className="h-full w-full flex flex-col">
       <div className="flex items-center justify-between p-4">
         <h1 className="text-2xl font-bold text-center">Books</h1>
+        <div>
+          <Input
+            label="Search"
+            type="text"
+            placeholder="Search by title or author"
+            className="w-64"
+            required={false}
+            onChange={(e) => {
+              const searchTerm = e.target.value.toLowerCase();
+              const filteredBooks = bookData.filter(
+                (book) =>
+                  book.title?.toLowerCase().includes(searchTerm) ||
+                  book.author?.toLowerCase().includes(searchTerm)
+              );
+            }}
+          />
+        </div>
         <Button
           label="Add Book"
           type="button"
