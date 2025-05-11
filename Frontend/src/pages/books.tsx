@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../components/Button";
 import { useNavigate } from "react-router";
 import { PencilIcon, Trash2Icon } from "lucide-react";
@@ -23,6 +23,11 @@ const Books = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredBooks, setFilteredBooks] = useState(bookData);
 
+  useEffect(() => {
+    // Update filteredBooks whenever bookData changes
+    setFilteredBooks(bookData);
+  }, [bookData]);
+
   const handleDelete = async () => {
     if (selectedBookId) {
       onDelete(selectedBookId);
@@ -43,9 +48,12 @@ const Books = () => {
 
   const handleSearch = () => {
     const filtered = bookData.filter((book) => {
-      book.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        book.author?.toLowerCase().includes(searchTerm.toLowerCase());
+      return (
+        book.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        book.author?.toLowerCase().includes(searchTerm.toLowerCase())
+      );
     });
+    setFilteredBooks(filtered);
   };
 
   return (
@@ -58,7 +66,8 @@ const Books = () => {
             placeholder="Search by title or author"
             className="w-64"
             required={false}
-            onChange={(e) => e.target.value}
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
           <Button
             label="Search"
@@ -87,7 +96,7 @@ const Books = () => {
             </tr>
           </thead>
           <tbody>
-            {bookData.map((book) => (
+            {filteredBooks.map((book) => (
               <tr
                 key={book.id}
                 className={`bg-white hover:bg-indigo-100 transition-colors`}
