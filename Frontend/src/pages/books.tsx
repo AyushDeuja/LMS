@@ -151,8 +151,8 @@ const Books = () => {
             </tbody>
           </table>
         ) : (
-          <div className="flex items-center justify-center h-full">
-            <p className="text-gray-500">No books found.</p>
+          <div className="flex items-center justify-center h-[80vh]">
+            <p className="text-red-500 text-3xl font-bold">No books found.</p>
           </div>
         )}
       </div>
