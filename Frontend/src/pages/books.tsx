@@ -89,66 +89,72 @@ const Books = () => {
         />
       </div>
       <div className="flex-1 overflow-x-auto overflow-y-auto">
-        <table className="w-full border-collapse bg-white shadow-xl rounded-lg">
-          <thead className="sticky top-0 bg-gradient-to-l from-indigo-700 to-purple-600 text-white z-10">
-            <tr>
-              <th className="py-3 px-6 text-left">Title</th>
-              <th className="py-3 px-6 text-left">Author</th>
-              <th className="py-3 px-6 text-left">Quantity</th>
-              <th className="py-3 px-6 text-left">Book Image</th>
-              <th className="py-3 px-6 text-left">Availability</th>
-              <th className="py-3 px-6 text-center">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredBooks.map((book) => (
-              <tr
-                key={book.id}
-                className={`bg-white hover:bg-indigo-100 transition-colors`}
-              >
-                <td className="py-3 px-6 border-b border-gray-200 font-bold text-lg">
-                  {book.title}
-                </td>
-                <td className="py-3 px-6 border-b border-gray-200 font-semibold">
-                  {book.author}
-                </td>
-                <td className="py-3 px-6 border-b border-gray-200">
-                  {book.quantity}
-                </td>
-                <td className="py-3 px-6 border-b border-gray-200">
-                  {book.book_img ? (
-                    <img
-                      src={book.book_img}
-                      alt={book.title}
-                      className="w-16 h-16 object-cover rounded-md"
-                    />
-                  ) : (
-                    "No Image Available"
-                  )}
-                </td>
-                <td className="py-3 px-6 border-b border-gray-200 font-semibold">
-                  {book.availability === true ? (
-                    <p className="text-green-600">Available</p>
-                  ) : (
-                    <p className="text-red-600">Not Available</p>
-                  )}
-                </td>
-                <td>
-                  <div className="flex items-center justify-center gap-4">
-                    <PencilIcon
-                      className="text-blue-400 cursor-pointer"
-                      onClick={() => navigate(`/edit-book/${book.id}`)}
-                    />
-                    <Trash2Icon
-                      className="text-red-400 cursor-pointer"
-                      onClick={() => openModal(book.id as number)}
-                    />
-                  </div>
-                </td>
+        {filteredBooks.length > 0 ? (
+          <table className="w-full border-collapse bg-white shadow-xl rounded-lg">
+            <thead className="sticky top-0 bg-gradient-to-l from-indigo-700 to-purple-600 text-white z-10">
+              <tr>
+                <th className="py-3 px-6 text-left">Title</th>
+                <th className="py-3 px-6 text-left">Author</th>
+                <th className="py-3 px-6 text-left">Quantity</th>
+                <th className="py-3 px-6 text-left">Book Image</th>
+                <th className="py-3 px-6 text-left">Availability</th>
+                <th className="py-3 px-6 text-center">Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {filteredBooks.map((book) => (
+                <tr
+                  key={book.id}
+                  className={`bg-white hover:bg-indigo-100 transition-colors`}
+                >
+                  <td className="py-3 px-6 border-b border-gray-200 font-bold text-lg">
+                    {book.title}
+                  </td>
+                  <td className="py-3 px-6 border-b border-gray-200 font-semibold">
+                    {book.author}
+                  </td>
+                  <td className="py-3 px-6 border-b border-gray-200">
+                    {book.quantity}
+                  </td>
+                  <td className="py-3 px-6 border-b border-gray-200">
+                    {book.book_img ? (
+                      <img
+                        src={book.book_img}
+                        alt={book.title}
+                        className="w-16 h-16 object-cover rounded-md"
+                      />
+                    ) : (
+                      "No Image Available"
+                    )}
+                  </td>
+                  <td className="py-3 px-6 border-b border-gray-200 font-semibold">
+                    {book.availability === true ? (
+                      <p className="text-green-600">Available</p>
+                    ) : (
+                      <p className="text-red-600">Not Available</p>
+                    )}
+                  </td>
+                  <td>
+                    <div className="flex items-center justify-center gap-4">
+                      <PencilIcon
+                        className="text-blue-400 cursor-pointer"
+                        onClick={() => navigate(`/edit-book/${book.id}`)}
+                      />
+                      <Trash2Icon
+                        className="text-red-400 cursor-pointer"
+                        onClick={() => openModal(book.id as number)}
+                      />
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <div className="flex items-center justify-center h-full">
+            <p className="text-gray-500">No books found.</p>
+          </div>
+        )}
       </div>
       <Modal
         isModalOpen={isModalOpen}
