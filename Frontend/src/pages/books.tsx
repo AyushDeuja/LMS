@@ -20,6 +20,8 @@ const Books = () => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedBookId, setSelectedBookId] = useState<number | null>(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredBooks, setFilteredBooks] = useState(bookData);
 
   const handleDelete = async () => {
     if (selectedBookId) {
@@ -49,23 +51,13 @@ const Books = () => {
             placeholder="Search by title or author"
             className="w-64"
             required={false}
-            onChange={(e) => {
-              const searchTerm = e.target.value.toLowerCase();
-              const filteredBooks = bookData.filter(
-                (book) =>
-                  book.title?.toLowerCase().includes(searchTerm) ||
-                  book.author?.toLowerCase().includes(searchTerm)
-              );
-            }}
+            onChange={(e) => e.target.value}
           />
-
           <Button
             label="Search"
             type="button"
             className="ml-2 "
-            onClick={() => {
-              // Implement search functionality here
-            }}
+            onClick={handleSearch}
           />
         </div>
         <Button
