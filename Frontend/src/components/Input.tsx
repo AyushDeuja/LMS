@@ -2,10 +2,10 @@ import { Eye, EyeOff } from "lucide-react";
 import { InputHTMLAttributes, MouseEvent, useState } from "react";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  label: string;
+  label?: string;
   type: string;
-  id: string;
-  name: string;
+  id?: string;
+  name?: string;
   required?: boolean;
 }
 

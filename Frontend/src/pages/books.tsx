@@ -45,7 +45,6 @@ const Books = () => {
         <h1 className="text-2xl font-bold text-center">Books</h1>
         <div>
           <Input
-            label="Search"
             type="text"
             placeholder="Search by title or author"
             className="w-64"
@@ -57,6 +56,15 @@ const Books = () => {
                   book.title?.toLowerCase().includes(searchTerm) ||
                   book.author?.toLowerCase().includes(searchTerm)
               );
+            }}
+          />
+
+          <Button
+            label="Search"
+            type="button"
+            className="ml-2 "
+            onClick={() => {
+              // Implement search functionality here
             }}
           />
         </div>
