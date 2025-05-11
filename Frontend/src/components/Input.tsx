@@ -42,7 +42,9 @@ const Input = ({
           id={id}
           name={name}
           required={required}
-          className={` outline-0 ${isPassword ? "w-[90%]" : "w-full"}`}
+          className={` outline-0 ${
+            isPassword ? "w-[90%]" : "w-full"
+          } ${className}`}
           {...rest}
         />
         {isPassword && (
