@@ -60,11 +60,11 @@ const Books = () => {
     <div className="h-full w-full flex flex-col">
       <div className="flex items-center justify-between p-4">
         <h1 className="text-2xl font-bold text-center">Books</h1>
-        <div className="flex items-center">
+        <div className="flex items-center ">
           <Input
             type="text"
             placeholder="Search by title or author"
-            className="w-64"
+            className="w-64 rounded-r-none"
             required={false}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -72,7 +72,7 @@ const Books = () => {
           <Button
             label="Search"
             type="button"
-            className="ml-2 px-4 !w-24"
+            className="rounded-l-none ml-0 !w-20"
             onClick={handleSearch}
           />
         </div>

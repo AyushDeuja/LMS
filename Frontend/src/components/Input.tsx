@@ -7,6 +7,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   id?: string;
   name?: string;
   required?: boolean;
+  className?: string;
 }
 
 const Input = ({
@@ -15,6 +16,7 @@ const Input = ({
   id,
   name,
   required = true,
+  className,
   ...rest
 }: InputProps) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -32,15 +34,15 @@ const Input = ({
       <label htmlFor={name} className="block font-bold text-sm text-gray-700">
         {label}
       </label>
-      <div className="flex items-center justify-between w-full px-2 py-2 border-none bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+      <div
+        className={`flex items-center justify-between w-full px-2 py-2 rounded-lg bg-gray-100  focus:outline-none focus:ring-2 focus:ring-blue-500 ${className}`}
+      >
         <input
           type={inputType}
           id={id}
           name={name}
           required={required}
-          className={`border-none outline-0 ${
-            isPassword ? "w-[90%]" : "w-full"
-          }`}
+          className={` outline-0 ${isPassword ? "w-[90%]" : "w-full"}`}
           {...rest}
         />
         {isPassword && (
