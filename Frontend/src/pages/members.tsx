@@ -63,6 +63,12 @@ const Members = () => {
                 }
               }}
             />
+            <Button
+              label="Search"
+              type="button"
+              className="rounded-l-none ml-0 !w-20"
+              onClick={handleSearch}
+            />
           </div>
           <Button
             label="Add Member"
