@@ -42,7 +42,12 @@ const Members = () => {
     (member) => member.id === selectedMemberId
   );
 
-  const handleSearch = () => {};
+  const handleSearch = () => {
+    const filtered = memberData.filter((member) => {
+      member.name?.toLowerCase().includes(searchTerm.toLowerCase());
+    });
+    setFilteredMembers(filtered);
+  };
 
   return (
     <div>
