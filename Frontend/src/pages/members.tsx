@@ -4,6 +4,7 @@ import Modal from "../components/Modal";
 import { useNavigate } from "react-router";
 import { useMember } from "../context/membersContext";
 import { useState } from "react";
+import Input from "../components/Input";
 
 export interface Member {
   name?: string;
@@ -41,11 +42,34 @@ const Members = () => {
     (member) => member.id === selectedMemberId
   );
 
+  const handleSearch = () => {};
+
   return (
     <div>
       <div className="h-full w-full flex flex-col">
         <div className="flex items-center justify-between p-4">
           <h1 className="text-2xl font-bold text-center">Members</h1>
+          <div className="flex items-center ">
+            <Input
+              type="text"
+              placeholder="Search by name"
+              className="w-64 rounded-r-none"
+              required={false}
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleSearch();
+                }
+              }}
+            />
+            <Button
+              label="Search"
+              type="button"
+              className="rounded-l-none ml-0 !w-20"
+              onClick={handleSearch}
+            />
+          </div>
           <Button
             label="Add Member"
             type="button"
