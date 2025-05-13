@@ -3,7 +3,7 @@ import Button from "../components/Button";
 import Modal from "../components/Modal";
 import { useNavigate } from "react-router";
 import { useMember } from "../context/membersContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Input from "../components/Input";
 
 export interface Member {
@@ -21,6 +21,10 @@ const Members = () => {
   const [selectedMemberId, setSelectedMemberId] = useState<number | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredMembers, setFilteredMembers] = useState(memberData);
+
+  useEffect(() => {
+    setFilteredMembers(memberData);
+  }, [memberData]);
 
   const handleDelete = async () => {
     if (selectedMemberId) {
@@ -44,7 +48,7 @@ const Members = () => {
 
   const handleSearch = () => {
     const filtered = memberData.filter((member) => {
-      member.name?.toLowerCase().includes(searchTerm.toLowerCase());
+      return member.name?.toLowerCase().includes(searchTerm.toLowerCase());
     });
     setFilteredMembers(filtered);
   };
@@ -94,7 +98,7 @@ const Members = () => {
               </tr>
             </thead>
             <tbody>
-              {memberData.map((member) => (
+              {filteredMembers.map((member) => (
                 <tr
                   key={member.id}
                   className={`bg-white hover:bg-indigo-100 transition-colors`}
