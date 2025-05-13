@@ -134,9 +134,9 @@ const Members = () => {
               </tbody>
             </table>
           ) : (
-            <div className="flex items-center justify-center h-[80vh]">
-              <p className="text-red-500 text-3xl font-bold">
-                No members found.
+            <div className="flex items-center justify-center h-[70vh]">
+              <p className="text-red-500 text-5xl font-bold">
+                Member Not Found.
               </p>
             </div>
           )}
