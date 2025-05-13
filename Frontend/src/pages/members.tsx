@@ -18,6 +18,8 @@ const Members = () => {
   const { memberData, onDelete } = useMember();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedMemberId, setSelectedMemberId] = useState<number | null>(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredMembers, setFilteredMembers] = useState(memberData);
 
   const handleDelete = async () => {
     if (selectedMemberId) {
